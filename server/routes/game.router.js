@@ -17,4 +17,21 @@ router.get('/', (req, res) => {
         })
 })
 
+router.post('/', (req, res) => {
+    const newGame = req.body;
+    const creator_id = req.user.id;
+    console.log(newGame);
+    console.log(creator_id);
+
+    const queryText = `INSERT INTO "games" ("game_title", "play_time", "developer", "description", "publisher", "image_url", "creator_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+
+    pool.query(queryText, [newGame.game_title, newGame.play_time, newGame.developer, newGame.description, newGame.publisher, newGame.image_url, creator_id])
+        .then(() => res.sendStatus(201))
+        .catch((error) => {
+            console.log('Error with adding a game', error);
+            res.sendStatus(500);
+        })
+})
+
 module.exports = router;
