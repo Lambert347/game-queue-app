@@ -13,7 +13,7 @@ function Profile(){
     console.log(queue);
 
     const goQueue = () => {
-        history.push(`/profile/queue`);
+        history.push(`/queue`);
     }
 
     const goSearch = () => {
@@ -22,7 +22,7 @@ function Profile(){
 
 
     useEffect (() => {
-        dispatch({type: 'FETCH_GAMES'});
+        dispatch({type: 'FETCH_GAMES'})
     }, [])
 
     

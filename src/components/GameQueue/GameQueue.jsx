@@ -1,10 +1,13 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+// import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 function GameQueue(){
-    const dispatch = useDispatch;
+    const dispatch = useDispatch();
     const queue = useSelector(store => store.queue);
+    console.log(queue)
+
+    
 
     const [newQueue, updateNewQueue] = useState(queue);
     console.log(newQueue);
@@ -18,19 +21,18 @@ function GameQueue(){
         updateNewQueue(games);
     }
 
-    useEffect(() => {
-        dispatch({type: 'FETCH_GAMES'});
-    }, [])
+    
 
     useEffect(() => {
         updateNewQueue(queue);
     }, [queue])
 
+    useEffect (() => {
+        dispatch({type: 'FETCH_USER_GAMES'})
+    }, [])
+
     return (
         <div className="Queue">
-            <DragDropContext
-                onDragEnd={onDragEnd}
-            >
                 <table className="games">
                     <thead>
                         <tr>
@@ -38,15 +40,12 @@ function GameQueue(){
                         </tr>
                     </thead>
                 </table>
-            </DragDropContext>
-
-
-
-
         </div>
     )
 
 
 }
+
+export default GameQueue;
 
 

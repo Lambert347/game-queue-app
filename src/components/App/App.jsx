@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Profile from '../Profile/Profile';
 import AddGame from '../AddGame/AddGame';
+import GameQueue from '../GameQueue/GameQueue';
 
 import './App.css';
 
@@ -112,6 +113,12 @@ function App() {
             exact path="/add"
           >
             <AddGame />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact path="/queue"
+          >
+            <GameQueue />
           </ProtectedRoute>
 
 

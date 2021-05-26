@@ -3,7 +3,7 @@ import axios from "axios";
 
 function* fetchQueue(){
     try{
-        const response = yield axios.get('/api/games');
+        const response = yield axios.get('/api/user_games');
         console.log(response.data);
         yield put({type: 'SET_USER_GAMES', payload: response.data});
     } catch {
@@ -11,7 +11,7 @@ function* fetchQueue(){
     }
 }
 
-function* queueSaga(){
+function* queueSaga() {
     yield takeLatest('FETCH_USER_GAMES', fetchQueue);
 }
 
