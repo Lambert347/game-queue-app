@@ -3,7 +3,7 @@ import axios from "axios";
 
 function* fetchGames(){
     try {
-        const response = yield axios.get('/api/game');
+        const response = yield axios.get('/api/games');
         console.log(response.data);
         yield put({type: 'SET_GAMES', payload: response.data});
     } catch {
