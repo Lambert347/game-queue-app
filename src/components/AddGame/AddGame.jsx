@@ -12,6 +12,7 @@ function AddGame() {
     const [publisher, setPublisher] = useState('');
     const [playTime, setPlayTime] = useState('');
     const [title, setTitle] = useState('');
+    const [platform, setPlatform] = useState('');
 
     const newGame = {
         game_title: title,
@@ -20,6 +21,7 @@ function AddGame() {
         description: description,
         publisher: publisher,
         image_url: url,
+        platform: platform,
     }
 
     const clearFields = () => {
@@ -29,6 +31,7 @@ function AddGame() {
         setPublisher('');
         setPlayTime('');
         setTitle('');
+        setPlatform('');
     }
 
 
@@ -55,6 +58,7 @@ function AddGame() {
                 <textarea onChange={(event) => setDescription(event.target.value)} value={description} placeholder="Description" required />
                 <input onChange={(event) => setPublisher(event.target.value)} value={publisher} placeholder="Publisher" required />
                 <input onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image Url" required/>
+                <input onChange={(event) => setPlatform(event.target.value)} value={platform} placeholder="Platform" required/>
                 <button>Submit</button>
             </form>
         </>
