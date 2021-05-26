@@ -9,4 +9,6 @@ function* addGame(action) {
         console.log('Error with adding a game to the library:', error);
         yield put ({type: 'ADD_FAILED'});
     }
-}
+};
+
+export default addGame;

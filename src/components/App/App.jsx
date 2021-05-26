@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Profile from '../Profile/Profile';
+import AddGame from '../AddGame/AddGame';
 
 import './App.css';
 
@@ -34,7 +35,6 @@ function App() {
     <Router>
       <div>
         <Nav />
-        <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
 
@@ -108,13 +108,14 @@ function App() {
           >
             <Profile />
           </ProtectedRoute>
+          <ProtectedRoute
+            exact path="/add"
+          >
+            <AddGame />
+          </ProtectedRoute>
 
 
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
-            <h1>404</h1>
-          </Route>
-        </Switch>
         <Footer />
       </div>
     </Router>

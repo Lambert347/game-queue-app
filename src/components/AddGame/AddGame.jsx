@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 function AddGame() {
     const dispatch = useDispatch();
+    const errors = useSelector((store) => store.errors);
+
+
     const [description, setDescription] = useState('');
     const [url, setUrl] = useState('');
     const [developer, setDeveloper] = useState('');
@@ -31,30 +34,32 @@ function AddGame() {
 
     const addGame = (event) => {
         event.preventDefault();
-
-        
-
         dispatch({type: 'ADD_NEW_GAME', payload: newGame})
         clearFields();
     }
-    return(
+    return (
         <>
             <div>
                 <h2>Add a game to the library:</h2>
                 <p>Make sure all the fields are correct and then submit!</p>
+                {errors.addMessage && (
+                    <h3 className="alert" role="alert">
+                        {errors.addMessage}
+                    </h3>
+                )}
             </div>
             <form onSubmit={addGame}>
-                <input onChange={(event) => setTitle(event.target.value)} value={title} placeholder="Game Title" />
-                <input onChange={(event) => setPlayTime(event.target.value)} value={playTime} placeholder="Average Play Time" />
-                <input onChange={(event) => setDeveloper(event.target.value)} value={developer} placeholder="Developer" />
-                <textarea onChange={(event) => setDescription(event.target.value)} value={description} placeholder="Description" />
-                <input onChange={(event) => setPublisher(event.target.value)} value={publisher} placeholder="Publisher" />
-                <input onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image Url" />
+                <input onChange={(event) => setTitle(event.target.value)} value={title} placeholder="Game Title" required/>
+                <input onChange={(event) => setPlayTime(event.target.value)} value={playTime} placeholder="Average Play Time" required/>
+                <input onChange={(event) => setDeveloper(event.target.value)} value={developer} placeholder="Developer" required />
+                <textarea onChange={(event) => setDescription(event.target.value)} value={description} placeholder="Description" required />
+                <input onChange={(event) => setPublisher(event.target.value)} value={publisher} placeholder="Publisher" required />
+                <input onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image Url" required/>
                 <button>Submit</button>
             </form>
-
         </>
-    )
-
+    );
 }
+
+export default AddGame;
 
