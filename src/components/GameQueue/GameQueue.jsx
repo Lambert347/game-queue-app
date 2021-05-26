@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-// import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 function GameQueue(){
     const dispatch = useDispatch();
@@ -21,6 +21,14 @@ function GameQueue(){
         updateNewQueue(games);
     }
 
+    const markComplete = () => {
+        console.log('click');
+    }
+
+    const removeGame = () => {
+        console.log('click')
+    }
+
     
 
     useEffect(() => {
@@ -33,17 +41,56 @@ function GameQueue(){
 
     return (
         <div className="Queue">
+            <DragDropContext 
+                onDragEnd={onDragEnd}
+            >
                 <table className="games">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>Title</th>
+                            <th>Platform</th>
+                            <th>Completed?</th>
+                            <th>Add Note</th>
+                            <th>Remove From Queue</th>
                         </tr>
                     </thead>
+                        <Droppable droppableId="game">
+                            {(provided) => (
+                                <tbody ref={provided.innerRef}
+                                {...provided.droppableProps}>
+                                    {newQueue.map((item, index) => 
+                                    <Draggable draggableId={String(item.game_id)} index={index} key={item.game_id}
+                                    >
+                                    {(provided) => (
+                                        <tr {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                        ref={provided.innerRef}
+                                        >
+                                            <>
+                                                <td>{item.game_title}</td>
+                                                <td>{item.platform}</td>
+                                                <td>
+                                                    <button onClick={markComplete}>Mark as Completed</button>
+                                                </td>
+                                                <td>
+                                                    {item.note}
+                                                </td>
+                                                <td>
+                                                    <button onClick={removeGame}>Remove</button>
+                                                </td>
+                                            </>
+                                        </tr>
+                                        )}
+                                    </Draggable>
+                                    )}
+                                {provided.placeholder}
+                                </tbody>
+                            )}
+                        </Droppable>
                 </table>
+            </DragDropContext>
         </div>
     )
-
-
 }
 
 export default GameQueue;
