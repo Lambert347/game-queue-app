@@ -16,6 +16,7 @@ function* updateQueue(action){
     console.log(action.payload);
     try{
         yield axios.post('/api/user_games', action.payload);
+        yield put({type: 'FETCH_USER_GAMES'});
     } catch {
         console.log('Error with updating user games');
     }

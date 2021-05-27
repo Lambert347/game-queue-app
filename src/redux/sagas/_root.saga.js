@@ -6,6 +6,7 @@ import gameSaga from './game.saga';
 import addGameSaga from './add.saga';
 import queueSaga from './queue.saga';
 import searchSaga from './search.saga';
+import deleteSaga from './delete.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,6 +24,7 @@ export default function* rootSaga() {
     addGameSaga(),
     queueSaga(),
     searchSaga(),
+    deleteSaga(),
 
   ]);
 }

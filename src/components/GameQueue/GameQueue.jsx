@@ -25,10 +25,6 @@ function GameQueue(){
         console.log('click');
     }
 
-    const removeGame = () => {
-        console.log('click')
-    }
-
     
 
     useEffect(() => {
@@ -76,7 +72,7 @@ function GameQueue(){
                                                     {item.note}
                                                 </td>
                                                 <td>
-                                                    <button onClick={removeGame}>Remove</button>
+                                                    <button onClick={() => dispatch({type: 'REMOVE_GAME', payload: item.game_id})}>Remove</button>
                                                 </td>
                                             </>
                                         </tr>

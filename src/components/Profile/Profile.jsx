@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import Preview from '../Preview/Preview';
 
 function Profile(){
-    const queue = useSelector((store) => store.game);
+    const queue = useSelector((store) => store.queue);
     const dispatch = useDispatch();
     const history = useHistory();
     console.log(queue);
@@ -22,7 +22,7 @@ function Profile(){
 
 
     useEffect (() => {
-        dispatch({type: 'FETCH_GAMES'})
+        dispatch({type: 'FETCH_USER_GAMES'})
     }, [])
 
     
@@ -36,7 +36,7 @@ function Profile(){
             </div>
             <div className="preview">
                 {queue.map(game => 
-                    <Preview key={game.id} game={game}/>
+                    <Preview key={game.game_id} game={game}/>
                 )}
             </div>
         </>
