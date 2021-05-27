@@ -83,7 +83,7 @@ export default function TemporaryDrawer(){
             </ListItem>
           ))}
           <ListItem>
-              <LogOutButton />
+            <LogOutButton />
           </ListItem>
         </List>
         <Divider />
