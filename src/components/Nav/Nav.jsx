@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
+// import './Nav.css';
 import {useSelector} from 'react-redux';
+import Drawer from '../Drawer/Drawer';
 
 function Nav() {
   const user = useSelector((store) => store.user);
-
+  
   let loginLinkData = {
     path: '/login',
     text: 'Login / Register',
@@ -19,32 +20,15 @@ function Nav() {
 
   return (
     <div className="nav">
+      <Drawer>
+      <Link className="navLink" to="/add">
+          Add
+      </Link>
+
+      </Drawer>
       <Link to="/home">
         <h2 className="nav-title">G@m3_t1me</h2>
       </Link>
-      <div>
-        <Link className="navLink" to={loginLinkData.path}>
-          {loginLinkData.text}
-        </Link>
-
-        {user.id && (
-          <>
-            <Link className="navLink" to="/info">
-              Info Page
-            </Link>
-            <LogOutButton className="navLink" />
-          </>
-        )}
-
-        <Link className="navLink" to="/about">
-          About
-        </Link>
-        <Link className="navLink" to="/add">
-          Add
-        </Link>
-
-      </div>
-        
     </div>
   );
 }
