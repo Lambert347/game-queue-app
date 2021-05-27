@@ -23,6 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import Profile from '../Profile/Profile';
 import AddGame from '../AddGame/AddGame';
 import GameQueue from '../GameQueue/GameQueue';
+import SearchGame from '../SearchGame/SearchGame';
 
 // import './App.css';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
@@ -141,6 +142,11 @@ function App() {
               exact path="/queue"
             >
               <GameQueue />
+            </ProtectedRoute>
+            <ProtectedRoute
+              exact path="/search"
+            >
+              <SearchGame />
             </ProtectedRoute>
 
 
