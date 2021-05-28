@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     const searchParams = req.query.search;
+
     console.log(searchParams);
     const queryText = ` SELECT * FROM "games" 
     JOIN "genres_id" ON genres_id.game_id = games.id
