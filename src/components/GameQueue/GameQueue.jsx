@@ -10,7 +10,6 @@ function GameQueue(){
     
 
     const [newQueue, updateNewQueue] = useState(queue);
-    console.log(newQueue);
     function onDragEnd(result) {
         if (!result.destination){
             return;
@@ -19,10 +18,12 @@ function GameQueue(){
         const [reorderedItem] = games.splice(result.source.index, 1);
         games.splice(result.destination.index, 0, reorderedItem);
         updateNewQueue(games);
+        dispatch({type: 'CHANGE_ORDER', payload: games})
     }
 
     const markComplete = () => {
         console.log('click');
+        console.log(newQueue[0]);
     }
 
     
@@ -34,6 +35,7 @@ function GameQueue(){
     useEffect (() => {
         dispatch({type: 'FETCH_USER_GAMES'})
     }, [])
+    
 
     return (
         <div className="Queue">

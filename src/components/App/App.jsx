@@ -24,6 +24,7 @@ import Profile from '../Profile/Profile';
 import AddGame from '../AddGame/AddGame';
 import GameQueue from '../GameQueue/GameQueue';
 import SearchGame from '../SearchGame/SearchGame';
+import Details from '../Details/Details';
 
 // import './App.css';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
@@ -59,6 +60,7 @@ function App() {
       <Router>
         <div theme={theme}>
           <Nav />
+          <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
 
@@ -83,13 +85,13 @@ function App() {
               <UserPage />
             </ProtectedRoute>
 
-            <ProtectedRoute
+            {/* <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
               exact
               path="/info"
             >
               <InfoPage />
-            </ProtectedRoute>
+            </ProtectedRoute> */}
 
             {/* When a value is supplied for the authRedirect prop the user will
               be redirected to the path supplied when logged in, otherwise they will
@@ -100,7 +102,7 @@ function App() {
               // - else shows LoginPage at /login
               exact
               path="/login"
-              authRedirect="/profile"
+              // authRedirect="/profile"
             >
               <LoginPage />
             </ProtectedRoute>
@@ -111,7 +113,7 @@ function App() {
               // - else shows RegisterPage at "/registration"
               exact
               path="/registration"
-              authRedirect="/profile"
+              authRedirect="/user"
             >
               <RegisterPage />
             </ProtectedRoute>
@@ -122,10 +124,12 @@ function App() {
               // - else shows LandingPage at "/home"
               exact
               path="/home"
-              authRedirect="/profile"
             >
               <LandingPage />
             </ProtectedRoute>
+            
+            {/* If none of the other routes matched, we will show a 404. */}
+            </Switch>
             <ProtectedRoute
               exact path="/profile"
               
@@ -148,10 +152,12 @@ function App() {
             >
               <SearchGame />
             </ProtectedRoute>
-
-
-            {/* If none of the other routes matched, we will show a 404. */}
-          <Footer />
+            <ProtectedRoute
+              exact path="/details"
+            >
+              <Details />
+            </ProtectedRoute>
+          <Footer />  
         </div>
       </Router>
     </ThemeProvider>

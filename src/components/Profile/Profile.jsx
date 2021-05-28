@@ -8,6 +8,8 @@ import Preview from '../Preview/Preview';
 
 function Profile(){
     const queue = useSelector((store) => store.queue);
+    const user = useSelector((store) => store.user);
+    console.log(user);
     const dispatch = useDispatch();
     const history = useHistory();
     console.log(queue);
@@ -19,6 +21,7 @@ function Profile(){
     const goSearch = () => {
         history.push('/search');
     }
+
 
 
     useEffect (() => {

@@ -12,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const gameRouter = require('./routes/game.router');
 const queueRouter = require('./routes/queue.router');
 const searchRouter = require('./routes/search.router');
+const genreRouter = require('./routes/genre.router');
 
 
 // Body parser middleware
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/api/games', gameRouter);
 app.use('/api/user_games', queueRouter);
 app.use('/api/search', searchRouter);
+app.use('/api/genres', genreRouter);
 
 // Serve static files
 app.use(express.static('build'));

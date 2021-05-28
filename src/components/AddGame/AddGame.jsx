@@ -13,6 +13,12 @@ function AddGame() {
     const [playTime, setPlayTime] = useState('');
     const [title, setTitle] = useState('');
     const [platform, setPlatform] = useState('');
+    const [genreId, setGenreId] = useState('')
+
+    const genre = useSelector((store) => store.genre);
+    console.log(genre);
+
+   
 
     const newGame = {
         game_title: title,
@@ -22,6 +28,7 @@ function AddGame() {
         publisher: publisher,
         image_url: url,
         platform: platform,
+        genre: genreId,
     }
 
     const clearFields = () => {
@@ -32,6 +39,7 @@ function AddGame() {
         setPlayTime('');
         setTitle('');
         setPlatform('');
+        setGenreId(0);
     }
 
 
@@ -40,6 +48,12 @@ function AddGame() {
         dispatch({type: 'ADD_NEW_GAME', payload: newGame})
         clearFields();
     }
+
+
+    useEffect(() => {
+        dispatch({type: 'FETCH_GENRE'})
+    }, [])
+ 
     return (
         <>
             <div>
@@ -59,6 +73,11 @@ function AddGame() {
                 <input onChange={(event) => setPublisher(event.target.value)} value={publisher} placeholder="Publisher" required />
                 <input onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image Url" required/>
                 <input onChange={(event) => setPlatform(event.target.value)} value={platform} placeholder="Platform" required/>
+                <select value={genre.id} name='genreId' onChange={(event) => setGenreId(event.target.value)}>
+                    {genre.map(genre => {
+                        return <option key={genre.id} value={genre.id}>{genre.genre_name}</option>
+                    })}
+                </select>
                 <button>Submit</button>
             </form>
         </>

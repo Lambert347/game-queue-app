@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState} from 'react';
 import SearchItem from '../SearchItem/SearchItem';
 
 function SearchGame() {

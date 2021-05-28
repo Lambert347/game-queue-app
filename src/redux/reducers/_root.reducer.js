@@ -5,6 +5,8 @@ import game from './game.reducer';
 import add from './add.reducer';
 import queue from './queue.reducer';
 import search from './search.reducer';
+import genre from './genre.reducer';
+import details from './details.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
   add,
   queue,
   search,
+  genre,
+  details,
 });
 
 export default rootReducer;
