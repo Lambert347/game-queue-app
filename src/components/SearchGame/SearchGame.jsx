@@ -65,12 +65,6 @@ function SearchGame() {
                 
                 
             </div>
-        {/* {searchResult[0] === undefined ?
-        '' : (
-            <>
-           
-             </>
-            )} */}
         </>
     )
 }

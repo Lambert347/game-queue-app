@@ -22,10 +22,21 @@ function* updateQueue(action){
     }
 }
 
+function* changeOrder(action){
+    console.log(action.payload)
+    try {
+        yield axios.put('/api/user_games', action.payload);
+        yield put({type: 'FETCH_USER_GAMES'});
+    } catch {
+        console.log('Error with updating queue order');
+    }
+}
+
 
 function* queueSaga() {
     yield takeLatest('FETCH_USER_GAMES', fetchQueue);
     yield takeLatest('UPDATE_QUEUE', updateQueue);
+    yield takeLatest('CHANGE_ORDER', changeOrder);
 }
 
 export default queueSaga;

@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import QueueItem from '../QueueItem/QueueItem'
 
 function GameQueue(){
     const dispatch = useDispatch();
@@ -21,11 +22,7 @@ function GameQueue(){
         dispatch({type: 'CHANGE_ORDER', payload: games})
     }
 
-    const markComplete = () => {
-        console.log('click');
-        console.log(newQueue[0]);
-    }
-
+    
     
 
     useEffect(() => {
@@ -64,19 +61,7 @@ function GameQueue(){
                                         {...provided.dragHandleProps}
                                         ref={provided.innerRef}
                                         >
-                                            <>
-                                                <td>{item.game_title}</td>
-                                                <td>{item.platform}</td>
-                                                <td>
-                                                    <button onClick={markComplete}>Mark as Completed</button>
-                                                </td>
-                                                <td>
-                                                    {item.note}
-                                                </td>
-                                                <td>
-                                                    <button onClick={() => dispatch({type: 'REMOVE_GAME', payload: item.game_id})}>Remove</button>
-                                                </td>
-                                            </>
+                                            <QueueItem game={item}/>
                                         </tr>
                                         )}
                                     </Draggable>
