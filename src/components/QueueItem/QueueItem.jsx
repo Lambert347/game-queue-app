@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {useHistory} from 'react-router-dom';
+import TableCell from '@material-ui/core/TableCell';
 
 
 function QueueItem(props){
@@ -21,17 +22,17 @@ function QueueItem(props){
 
     return (
         <>
-            <td onClick={handleClick}>{game.game_title}</td>
-            <td>{game.platform}</td>
-            <td>
+            <TableCell align="right" onClick={handleClick}>{game.game_title}</TableCell>
+            <TableCell align="right">{game.platform}</TableCell>
+            <TableCell align="right">
                 <button onClick={markComplete}>Mark as Completed</button>
-            </td>
-            <td>
+            </TableCell>
+            <TableCell align="right">
                 {game.note}
-            </td>
-            <td>
+            </TableCell>
+            <TableCell align="right">
                 <button onClick={() => dispatch({type: 'REMOVE_GAME', payload: game.game_id})}>Remove</button>
-            </td>
+            </TableCell>
         </>
     );
 }
