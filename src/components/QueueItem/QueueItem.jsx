@@ -10,8 +10,7 @@ function QueueItem(props){
     console.log(game.game_id);
 
     const markComplete = () => {
-        console.log('click');
-        console.log(newQueue[0]);
+        dispatch({type: 'UPDATE_GAME', payload: game.game_id})
     }
 
 
