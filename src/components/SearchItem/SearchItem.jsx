@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {useHistory} from 'react-router-dom';
+import TableCell from '@material-ui/core/TableCell';
 
 function SearchItem(props) {
     const dispatch = useDispatch();
@@ -17,15 +18,18 @@ function SearchItem(props) {
 
     return (
         <>
-            <td onClick={handleClick}>{game.game_title}</td>
-            <td>{game.platform}</td>
-            <td>
+            <TableCell onClick={handleClick}>{game.game_title}</TableCell>
+            <TableCell align="right">{game.platform}</TableCell>
+            <TableCell align="right">
                 {game.genre_name}
-            </td>
-            <td>{game.play_time}</td>
-            <td>
+            </TableCell>
+            <TableCell align="right">{game.play_time}</TableCell>
+            <TableCell align="right">
                 <button onClick={saveGame}>Save</button>
-            </td>
+            </TableCell>
+            <TableCell>
+                {game.genre}
+            </TableCell>
         </>
     )
 }

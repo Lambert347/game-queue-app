@@ -1,11 +1,28 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import QueueItem from '../QueueItem/QueueItem'
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 function GameQueue(){
     const dispatch = useDispatch();
     const queue = useSelector(store => store.queue);
     console.log(queue)
+
+    const useStyles = makeStyles({
+        table: {
+            minWidth: 650,
+        },
+    });
+    const classes=useStyles();
+
 
     
 
@@ -18,14 +35,10 @@ function GameQueue(){
         const [reorderedItem] = games.splice(result.source.index, 1);
         games.splice(result.destination.index, 0, reorderedItem);
         updateNewQueue(games);
-        dispatch({type: 'CHANGE_ORDER', payload: games})
+        // dispatch({type: 'CHANGE_ORDER', payload: games})
     }
 
-    const markComplete = () => {
-        console.log('click');
-        console.log(newQueue[0]);
-    }
-
+    
     
 
     useEffect(() => {
@@ -39,54 +52,44 @@ function GameQueue(){
 
     return (
         <div className="Queue">
+        <TableContainer component={Paper} color="primary">
             <DragDropContext 
                 onDragEnd={onDragEnd}
             >
-                <table className="games">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Platform</th>
-                            <th>Completed?</th>
-                            <th>Add Note</th>
-                            <th>Remove From Queue</th>
-                        </tr>
-                    </thead>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Title</TableCell>
+                            <TableCell align="right">Platform</TableCell>
+                            <TableCell align="right">Completed?</TableCell>
+                            <TableCell align="right">Add Note</TableCell>
+                            <TableCell align="right">Remove From Queue</TableCell>
+                        </TableRow>
+                    </TableHead>
                         <Droppable droppableId="game">
                             {(provided) => (
-                                <tbody ref={provided.innerRef}
+                                <TableBody ref={provided.innerRef}
                                 {...provided.droppableProps}>
                                     {newQueue.map((item, index) => 
                                     <Draggable draggableId={String(item.game_id)} index={index} key={item.game_id}
                                     >
                                     {(provided) => (
-                                        <tr {...provided.draggableProps}
+                                        <TableRow {...provided.draggableProps}
                                         {...provided.dragHandleProps}
                                         ref={provided.innerRef}
                                         >
-                                            <>
-                                                <td>{item.game_title}</td>
-                                                <td>{item.platform}</td>
-                                                <td>
-                                                    <button onClick={markComplete}>Mark as Completed</button>
-                                                </td>
-                                                <td>
-                                                    {item.note}
-                                                </td>
-                                                <td>
-                                                    <button onClick={() => dispatch({type: 'REMOVE_GAME', payload: item.game_id})}>Remove</button>
-                                                </td>
-                                            </>
-                                        </tr>
+                                            <QueueItem game={item}/>
+                                        </TableRow>
                                         )}
                                     </Draggable>
                                     )}
                                 {provided.placeholder}
-                                </tbody>
+                                </TableBody>
                             )}
                         </Droppable>
-                </table>
+                </Table>
             </DragDropContext>
+        </TableContainer>
         </div>
     )
 }

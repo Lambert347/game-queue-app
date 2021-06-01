@@ -74,7 +74,7 @@ export default function TemporaryDrawer(){
         onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
       >
-        <List color="primary">
+        <List color="palette.secondary">
           {menuItems.map((item, index) => (
             <ListItem button key={item.text}
                 onClick={() => history.push(item.path)}
