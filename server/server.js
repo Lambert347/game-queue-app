@@ -14,7 +14,8 @@ const queueRouter = require('./routes/queue.router');
 const searchRouter = require('./routes/search.router');
 const genreRouter = require('./routes/genre.router');
 const editRouter = require('./routes/edit.router');
-
+const noteRouter = require('./routes/note.router');
+const orderRouter = require('./routes/order.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -34,6 +35,8 @@ app.use('/api/user_games', queueRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/genres', genreRouter);
 app.use('/api/edit', editRouter);
+app.use('/api/note', noteRouter);
+app.use('/api/order', orderRouter);
 
 // Serve static files
 app.use(express.static('build'));

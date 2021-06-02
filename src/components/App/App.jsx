@@ -153,7 +153,7 @@ function App() {
               <SearchGame />
             </ProtectedRoute>
             <ProtectedRoute
-              exact path="/details"
+              exact path="/details/:id"
             >
               <Details />
             </ProtectedRoute>

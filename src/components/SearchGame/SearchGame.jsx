@@ -10,6 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
+import {Button} from '@material-ui/core';
 
 function SearchGame() {
     const dispatch = useDispatch();
@@ -43,6 +44,45 @@ function SearchGame() {
     });
     const classes=useStyles();
 
+    // const useSortableData = (games, config = null) => {
+    //     const [sortConfig, setSortConfig] = useState(config);
+
+    //     const sortedGames = React.useMemo(() => {
+    //     let sortableGames = [...games];
+    //     if (sortConfig !== null) {
+    //         sortableGames.sort((a, b) => {
+    //             if (a[sortConfig.key] < b[sortConfig.key]) {
+    //                 return sortConfig.direction === 'ascending' ? -1 : 1;
+    //             }
+    //             if (a[sortConfig.key] > b[sortConfig.key]) {
+    //                 return sortConfig.direction === 'ascending' ? 1 : -1;
+    //             }
+    //             return 0;
+    //         });
+    //     }
+    //     return sortableGames;
+    //     }, [games, sortConfig]);
+        
+    //     const requestSort = key => {
+    //         let direction = 'ascending';
+    //         if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+    //             direction === 'descending';
+    //         }
+    //         setSortConfig({key, direction});
+    //     }
+    // return {games: sortedGames, requestSort, sortConfig};
+    // }
+
+    // const SearchTable = (props) => {
+    //     const {games, requestSort, sortConfig} = useSortableData(props.searchResult)
+    //     const getClassNamesFor = (name) => {
+    //     if (!sortConfig) {
+    //         return;
+    //     }
+    //     return sortConfig.key === name ? sortConfig.direction : undefined;
+    // };
+    // } 
+
     
 
     return (
@@ -60,12 +100,23 @@ function SearchGame() {
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Title</TableCell>
-                            <TableCell align="right">Platform</TableCell>
-                            <TableCell align="right">Genre(s)</TableCell>
-                            <TableCell align="right">Average Playtime</TableCell>
-                            <TableCell align="right">Genre</TableCell>
-                            <TableCell align="right">Save Game</TableCell>
+                            <TableCell>
+                                <Button color="secondary" variant="contained" type="button">
+                                    Title
+                                </Button>
+                            </TableCell>
+                            <TableCell align="right">
+                                <Button color="secondary" variant="contained" type="button">Platform</Button>
+                            </TableCell>
+                            <TableCell align="right">
+                                <Button color="secondary" variant="contained" type="button">Genre(s)</Button>
+                            </TableCell>
+                            <TableCell align="right">
+                                <Button color="secondary" variant="contained" type="button">Average Playtime</Button>
+                            </TableCell>
+                            <TableCell align="right">
+                                Save Game
+                            </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
