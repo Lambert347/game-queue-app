@@ -5,6 +5,7 @@ import TableCell from '@material-ui/core/TableCell';
 function SearchItem(props) {
     const dispatch = useDispatch();
     const history = useHistory();
+    
     const game = props.game
     console.log(game.game_id);
     const saveGame = () => {
@@ -12,8 +13,8 @@ function SearchItem(props) {
     }
 
     const handleClick = () => {
-        dispatch({type: 'FETCH_DETAILS', payload: game.game_id})
-        history.push('/details');
+        dispatch({type: 'SET_DETAILS', payload: game.game_id})
+        history.push(`/details/${game.game_id}`);
     }
 
     return (
@@ -26,9 +27,6 @@ function SearchItem(props) {
             <TableCell align="right">{game.play_time}</TableCell>
             <TableCell align="right">
                 <button onClick={saveGame}>Save</button>
-            </TableCell>
-            <TableCell>
-                {game.genre}
             </TableCell>
         </>
     )

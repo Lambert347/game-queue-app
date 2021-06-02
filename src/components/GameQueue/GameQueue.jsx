@@ -35,7 +35,7 @@ function GameQueue(){
         const [reorderedItem] = games.splice(result.source.index, 1);
         games.splice(result.destination.index, 0, reorderedItem);
         updateNewQueue(games);
-        // dispatch({type: 'CHANGE_ORDER', payload: games})
+        dispatch({type: 'CHANGE_ORDER', payload: games})
     }
 
     

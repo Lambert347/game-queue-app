@@ -4,6 +4,8 @@ import {useHistory} from 'react-router-dom';
 import TableCell from '@material-ui/core/TableCell';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import {Button, TextField} from '@material-ui/core';
+import './Modal.css'
 
 
 function QueueItem(props){
@@ -33,15 +35,14 @@ function QueueItem(props){
         dispatch({type: 'UPDATE_NOTE', payload: updatedGame})
     }
 
-    const handleClick = () => {
-        dispatch({type: 'FETCH_DETAILS', payload: game.game_id})
-        history.push('/details');
+    const seeDetails = () => {
+        dispatch({type: 'SET_DETAILS', payload: game.game_id})
+        history.push(`/details/${game.game_id}`);
     }
 
     return (
         <>
-        
-            <TableCell align="right" onClick={handleClick}>{game.game_title}</TableCell>
+            <TableCell align="right" onClick={seeDetails}>{game.game_title}</TableCell>
             <TableCell align="right">{game.platform}</TableCell>
             <TableCell align="right">
                 <button onClick={markComplete}>Mark as Completed</button>
@@ -49,17 +50,56 @@ function QueueItem(props){
             <TableCell align="right">
                 {game && game.note ?
                     <div>
-                        <Popup trigger={<button>See note</button>} position="right center">
-                            <button onClick={seeNote}>See note</button>
+                        <Popup color="primary" trigger={<Button color="secondary" className="button">See Note</Button>} position="right center"
+                        modal
+                        nested
+                        >
+                            {close => (
+                                <div className="modal">
+                                    <Button className="close" onClick={close}>
+                                        &times;
+                                    </Button>
+                                    <div className="header">Note</div>
+                                    <div className="content">
+                                        {' '}
+                                        {game.note}
+                                    </div>
+                                </div>
+                            )}
                         </Popup>
                     </div>
                     :
                     <div>
-                        <Popup trigger={<button>Add Note</button>} position="right center">
-                            <form onSubmit={addNote}>
-                                <textarea onChange={(event) => setNote(event.target.value)}></textarea>
-                                <button>Add Note</button>
-                            </form>
+                        <Popup color="primary" trigger={<Button color="secondary" variant="contained" className="button">Add Note</Button>} position="right center"
+                        modal
+                        nested 
+                        >
+                            {close => (
+                                <div className="modal">
+                                    <Button className="close" onClick={close}>
+                                        &times;
+                                    </Button>
+                                    <div className="header">Add a note</div>
+                                    <div className="content">
+                                        {' '}
+                                        <form onSubmit={addNote}>
+                                            <textarea onChange={(event) => setNote(event.target.value)}></textarea>
+                                            <br />
+                                            <Button color="secondary" variant="contained" onClick={addNote}>Add Note</Button>
+                                        </form>
+                                    </div>
+                                    <div className="actions">
+                                        <Button color="secondary" variant="outlined"
+                                            className="button"
+                                            onClick={() => {
+                                                close();
+                                            }}
+                                        >
+                                            Close
+                                        </Button>
+                                    </div>
+                                </div>
+                            )}
                         </Popup>
                     </div>
                 }
