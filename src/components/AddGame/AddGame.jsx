@@ -7,6 +7,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {Button, TextField} from '@material-ui/core';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import '../QueueItem/Modal.css';
 
 function AddGame() {
     const dispatch = useDispatch();
@@ -61,7 +64,9 @@ function AddGame() {
     }
 
 
+
     const addGame = (event) => {
+        console.log('click');
         event.preventDefault();
         dispatch({type: 'ADD_NEW_GAME', payload: newGame})
         clearFields();
@@ -83,12 +88,12 @@ function AddGame() {
                     </h3>
                 )}
             </div>
-            <FormControl className={classes.formControl} onSubmit={addGame}>
+            <FormControl className={classes.formControl}>
                 <InputLabel>Genre</InputLabel>
                 <Select value={genre.id} defaultValue = "" name='genreId' onChange={(event) => setGenreId(event.target.value)}>
-                    {genre.map(genre => {
-                        return <MenuItem key={genre.id} value={genre.id}>{genre.genre_name}</MenuItem>
-                    })}
+                        {genre.map(genre => {
+                            return <MenuItem key={genre.id} value={genre.id}>{genre.genre_name}</MenuItem>
+                        })}
                 </Select>
                 <br></br>
                 <TextField onChange={(event) => setTitle(event.target.value)} value={title} placeholder="Game Title" required/>
@@ -104,7 +109,26 @@ function AddGame() {
                 <TextField onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image Url" required/>
                 <br></br>
                 <TextField onChange={(event) => setPlatform(event.target.value)} value={platform} placeholder="Platform" required/>
-                <Button>Add Game</Button>
+                <Popup color="primary" trigger={ <Button onClick={addGame} color="secondary">Add Game</Button>}
+                modal
+                nested
+                >
+                {close => (
+                    <div className="modal">
+                        <Button className="close" onClick={close}>
+                            &times;
+                        </Button>
+                        <div className="header">Thanks!</div>
+                        <div className="content">
+                            {' '}
+                            <p>Thank for contributing! Your new game is now searchable!</p>
+                        </div>
+                        <Button onClick={addGame}>Ok</Button>
+                    </div>
+                )}
+                </Popup>
+                
+               
             </FormControl>
         </>
     );
