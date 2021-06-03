@@ -6,10 +6,15 @@ import {Button} from '@material-ui/core';
 function Details(){
     const details = useSelector(store => store.details);
     const dispatch = useDispatch();
-   
     const [inQueue, setInQueue] = useState(false);
+   
+    useEffect (() => {
+        dispatch({type: 'FETCH_USER_GAMES'});
+    }, [])
+
     const queue = useSelector(store => store.queue);
     console.log(details);
+    console.log('Checking in queue', inQueue);
 
     // const saveGame = () => {
     //     dispatch({type: 'UPDATE_QUEUE', payload: details})
@@ -18,44 +23,45 @@ function Details(){
     const {id} = useParams();
 
     useEffect (() => {
-        dispatch({type: 'FETCH_USER_GAMES'});
-        checkQueue();
-    }, [])
-
-    useEffect (() => {
         dispatch({type: 'FETCH_DETAILS', payload: id})
     }, [])
 
+    useEffect (() => {
+        checkQueue();
+    }, [])
+
+
+    
     const checkQueue = () => {
         for (let i = 0; i < queue.length; i++) {
-            if (queue[i].game_id === details[0].game_id) {
+            if (queue[i].game_id === details.game_id) {
                 setInQueue(true);
-                return inQueue;
+                console.log(inQueue)
             }
             else {
-                return inQueue;
+                setInQueue(false);
             }
         }
     }
-
+        
 
     return (
         <div>
-            {details[0] === undefined ?
+            {details === undefined ?
             '' : (
                 <section>
-                        <p>{details[0].game_title}</p>
-                        <img src={details[0].image_url}></img>
-                        <p>{details[0].developer}</p>
-                        <p>{details[0].publisher}</p>
-                        <p>{details[0].genre_name}</p>
-                        <p>{details[0].description}</p>
-                        <p>{details[0].play_time}</p>
-                        {inQueue === true ?
-                            <Button variant="disabled">Already in Queue</Button> 
-                            : (
+                        <p>{details.game_title}</p>
+                        <img src={details.image_url}></img>
+                        <p>{details.developer}</p>
+                        <p>{details.publisher}</p>
+                        <p>{details.genre_name}</p>
+                        <p>{details.description}</p>
+                        <p>{details.play_time}</p>
+                        {/* {inQueue === true ?
                             <Button variant="contained" color="secondary" onClick={saveGame}>Add Game</Button>
-                        )}
+                            : (
+                            <Button variant="contained" disabled>Already in Queue</Button> 
+                        )} */}
                 </section>
             )}
         </div>

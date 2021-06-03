@@ -5,7 +5,7 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
-  router.put('/:id', (req, res) => {
+  router.put('/:id', rejectUnauthenticated, (req, res) => {
     console.log('Body:', req.body.note);
     console.log('params:', req.body.id);
     console.log('User id:', req.user.id);

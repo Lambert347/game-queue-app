@@ -14,6 +14,7 @@ function SearchItem(props) {
 
     const handleClick = () => {
         dispatch({type: 'SET_DETAILS', payload: game.game_id})
+        dispatch({type: 'FETCH_USER_GAMES'});
         history.push(`/details/${game.game_id}`);
     }
 

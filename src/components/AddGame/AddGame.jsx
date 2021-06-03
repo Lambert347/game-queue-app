@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import {Button, TextField} from '@material-ui/core';
 
 function AddGame() {
     const dispatch = useDispatch();
@@ -18,6 +25,17 @@ function AddGame() {
     const genre = useSelector((store) => store.genre);
     console.log(genre);
 
+    const useStyles = makeStyles((theme) => ({
+        formControl: {
+            margin: theme.spacing(1),
+            minWidth: 120,
+        },
+        selectEmpty: {
+            marginTop: theme.spacing(2),
+        },
+    }));
+
+    const classes = useStyles();
    
 
     const newGame = {
@@ -39,7 +57,7 @@ function AddGame() {
         setPlayTime('');
         setTitle('');
         setPlatform('');
-        setGenreId(0);
+        setGenreId('');
     }
 
 
@@ -65,21 +83,29 @@ function AddGame() {
                     </h3>
                 )}
             </div>
-            <form onSubmit={addGame}>
-                <input onChange={(event) => setTitle(event.target.value)} value={title} placeholder="Game Title" required/>
-                <input onChange={(event) => setPlayTime(event.target.value)} value={playTime} placeholder="Average Play Time" required/>
-                <input onChange={(event) => setDeveloper(event.target.value)} value={developer} placeholder="Developer" required />
-                <textarea onChange={(event) => setDescription(event.target.value)} value={description} placeholder="Description" required />
-                <input onChange={(event) => setPublisher(event.target.value)} value={publisher} placeholder="Publisher" required />
-                <input onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image Url" required/>
-                <input onChange={(event) => setPlatform(event.target.value)} value={platform} placeholder="Platform" required/>
-                <select value={genre.id} name='genreId' onChange={(event) => setGenreId(event.target.value)}>
+            <FormControl className={classes.formControl} onSubmit={addGame}>
+                <InputLabel>Genre</InputLabel>
+                <Select value={genre.id} defaultValue = "" name='genreId' onChange={(event) => setGenreId(event.target.value)}>
                     {genre.map(genre => {
-                        return <option key={genre.id} value={genre.id}>{genre.genre_name}</option>
+                        return <MenuItem key={genre.id} value={genre.id}>{genre.genre_name}</MenuItem>
                     })}
-                </select>
-                <button>Submit</button>
-            </form>
+                </Select>
+                <br></br>
+                <TextField onChange={(event) => setTitle(event.target.value)} value={title} placeholder="Game Title" required/>
+                <br></br>
+                <TextField onChange={(event) => setPlayTime(event.target.value)} value={playTime} placeholder="Average Play Time" required/>
+                <br></br>
+                <TextField onChange={(event) => setDeveloper(event.target.value)} value={developer} placeholder="Developer" required />
+                <br></br>
+                <TextField onChange={(event) => setDescription(event.target.value)} value={description} placeholder="Description" required />
+                <br></br>
+                <TextField onChange={(event) => setPublisher(event.target.value)} value={publisher} placeholder="Publisher" required />
+                <br></br>
+                <TextField onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image Url" required/>
+                <br></br>
+                <TextField onChange={(event) => setPlatform(event.target.value)} value={platform} placeholder="Platform" required/>
+                <Button>Add Game</Button>
+            </FormControl>
         </>
     );
 }

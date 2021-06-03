@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { useState} from 'react';
+import { useState, useEffect} from 'react';
 import SearchItem from '../SearchItem/SearchItem';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,18 +9,27 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {Button, TextField} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import {Button} from '@material-ui/core';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+
 
 function SearchGame() {
     const dispatch = useDispatch();
     const [search, setSearch] = useState('');
     const [genre, setGenre] = useState('');
-    const searchResult = useSelector(store => store.search)
+    const searchResult = useSelector((store) => store.search);
+    const searchGenre = useSelector((store) => store.genre);
 
     const searchForGame = () => {
         event.preventDefault();
         console.log(search);
+        console.log(genre);
             axios.get('/api/search', {
                 params: {
                     search: search,
@@ -37,12 +46,12 @@ function SearchGame() {
             })
         }
 
-    const useStyles = makeStyles({
-        table: {
-            minWidth: 650,
-        },
-    });
-    const classes=useStyles();
+    // const useStyles = makeStyles({
+    //     table: {
+    //         minWidth: 650,
+    //     },
+    // });
+    // const classes=useStyles();
 
     // const useSortableData = (games, config = null) => {
     //     const [sortConfig, setSortConfig] = useState(config);
@@ -82,8 +91,22 @@ function SearchGame() {
     //     return sortConfig.key === name ? sortConfig.direction : undefined;
     // };
     // } 
+    const useStyles = makeStyles((theme) => ({
+        formControl: {
+            margin: theme.spacing(1),
+            minWidth: 120,
+        },
+        selectEmpty: {
+            marginTop: theme.spacing(2),
+        },
+    }));
 
-    
+    const classes = useStyles();
+
+    useEffect(() => {
+        dispatch({type: 'FETCH_GENRE'})
+    }, [])
+ 
 
     return (
         <>
@@ -91,7 +114,12 @@ function SearchGame() {
                 <h2>Search and Save</h2>
                 <form onSubmit={searchForGame}>
                     <input onChange={(event) => setSearch(event.target.value)} value={search} placeholder="Game Title"></input>
-                    <input onChange={(event) => setGenre(event.target.value)} value={genre} placeholder="Search Genre"></input>
+                    <InputLabel>Genre</InputLabel>
+                    <Select value={searchGenre.genre_name} defaultValue = "" name='genreId' onChange={(event) => setGenre(event.target.value)}>
+                        {searchGenre.map(genre => {
+                            return <MenuItem key={genre.id} value={genre.genre_name}>{genre.genre_name}</MenuItem>
+                        })}
+                    </Select>
                     <button>Search</button>
                 </form>
             </div>

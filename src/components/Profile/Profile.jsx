@@ -62,14 +62,15 @@ function Profile(){
     useEffect (() => {
         dispatch({type: 'FETCH_USER_GAMES'})
     }, [])
-
+    
+    
     const [newQueue, updateNewQueue] = useState(queue);
     let [splicedQueue, setSplicedQueue] = useState(newQueue);
     function onDragEnd(result) {
         if (!result.destination){
             return;
         }
-        const games = Array.from(splicedQueue);
+        const games = Array.from(newQueue);
         const [reorderedItem] = games.splice(result.source.index, 1);
         games.splice(result.destination.index, 0, reorderedItem);
         updateNewQueue(games);
@@ -92,7 +93,7 @@ function Profile(){
                 {(provided) => (
                 <div ref={provided.innerRef}
                 {...provided.droppableProps}>
-                    {splicedQueue.map((game, index) => 
+                    {queue.map((game, index) => 
                     <Draggable draggableId={String(game.game_id)} index={index} key={game.game_id}>
                     {(provided) => (
                         <Card className={classes.root} {...provided.draggableProps}

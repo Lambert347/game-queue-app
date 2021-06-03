@@ -14,6 +14,9 @@ function QueueItem(props){
     const game = props.game;
     const [isOpen, setIsOpen] = useState(false);
     const [note, setNote] = useState('');
+    
+
+
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -36,7 +39,8 @@ function QueueItem(props){
     }
 
     const seeDetails = () => {
-        dispatch({type: 'SET_DETAILS', payload: game.game_id})
+        dispatch({type: 'SET_DETAILS', payload: game.game_id});
+        dispatch({type: 'FETCH_USER_GAMES'});
         history.push(`/details/${game.game_id}`);
     }
 
@@ -83,7 +87,7 @@ function QueueItem(props){
                                     <div className="content">
                                         {' '}
                                         <form onSubmit={addNote}>
-                                            <textarea onChange={(event) => setNote(event.target.value)}></textarea>
+                                            <TextField onChange={(event) => setNote(event.target.value)}></TextField>
                                             <br />
                                             <Button color="secondary" variant="contained" onClick={addNote}>Add Note</Button>
                                         </form>

@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
 
-
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     const query = `SELECT * FROM "games";`;
 
     pool.query(query)
@@ -17,19 +19,19 @@ router.get('/', (req, res) => {
         })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     const details = req.params.id;
     console.log(details);
 
-    const queryText = `SELECT description, genre_name, games.id, "game_title", "play_time", "developer", "description", "publisher", "image_url", "platform", "creator_id"
+    const queryText = `SELECT description, genre_name, genres_id.game_id, "game_title", "play_time", "developer", "description", "publisher", "image_url", "platform", "creator_id"
     FROM "games"
     JOIN "genres_id" ON genres_id.game_id = games.id
     JOIN "genres" ON genres.id = genres_id.genres_id
     WHERE games.id=$1;`;
     pool.query(queryText, [details])
     .then(result => {
-        console.log(result.rows);
-        res.send(result.rows);
+        console.log(result.rows[0]);
+        res.send(result.rows[0]);
     })
     .catch(error => {
         console.log('Error with getting details for game', error);
@@ -39,10 +41,10 @@ router.get('/:id', (req, res) => {
 
 
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     const newGame = req.body;
     const creator_id = req.user.id;
-    console.log(newGame);
+    console.log('New game:', newGame);
     console.log(creator_id);
 
     const queryText = `INSERT INTO "games" ("game_title", "play_time", "developer", "description", "publisher", "image_url", "platform", "creator_id")
@@ -64,7 +66,7 @@ router.post('/', (req, res) => {
             })
         }).catch(error =>{
             console.log('Error with adding game', error);
-            result.sendStatus(500);
+            res.sendStatus(500);
         })
 })
 

@@ -5,20 +5,23 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
-router.put('/', async (req, res) => {
+router.put('/', rejectUnauthenticated, async (req, res) => {
     const userToUpdate = req.user.id;
     
     const newQueue = req.body;
+    console.log('Checking queue:', newQueue);
     const client = await pool.connect();
     try {
         await client.query('BEGIN')
         Promise.all(newQueue.map(game => {
-            const queryText = `UPDATE user_games SET id = $1 WHERE game_id = $2 AND user_id = $3;`;
-            const queryValues = [game.id, game.game_id, userToUpdate];
+            console.log('Checking Game id:', game.game_id);
+            console.log('Checking game.id:', game.id);
+            const queryText = `UPDATE user_games SET order_number = $1 WHERE game_id = $2 AND user_id = $3;`;
+            const queryValues = [game.order_number, game.game_id, userToUpdate];
             pool.query(queryText, queryValues);
         }));
         await client.query('COMMIT')
-        res.sendStatus(201);
+        res.sendStatus(200);
     } catch (error) {
         await client.query('ROLLBACK')
         console.log('Error with editing order', error);
