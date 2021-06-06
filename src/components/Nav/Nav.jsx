@@ -27,7 +27,7 @@ function Nav() {
 
       </Drawer>
       <Link to="/home">
-        <h2 className="nav-title">G@m3_t1me</h2>
+        <h2 className="nav-title">Game_time</h2>
       </Link>
     </div>
   );

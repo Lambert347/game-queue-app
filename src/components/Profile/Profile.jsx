@@ -14,6 +14,10 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
+import Grid from '@material-ui/core/Grid';
+import useStyles from '../App/style';
+import Container from '@material-ui/core/Container';
+
 
 
 function Profile(){
@@ -23,30 +27,7 @@ function Profile(){
     const dispatch = useDispatch();
     const history = useHistory();
     console.log(queue);
-
-    const useStyles = makeStyles({
-        root: {
-          maxWidth: 300,
-          margin: 'auto',
-          overflow: 'hidden',
-        },
-        bullet: {
-          display: 'inline-block',
-          margin: '0 2px',
-          transform: 'scale(0.8)',
-        },
-        title: {
-          fontSize: 14,
-        },
-        pos: {
-          marginBottom: 12,
-        },
-        image: {
-            height: '15%',
-            width: '15%',
-        }
-      });
-      const classes = useStyles();
+    const classes = useStyles();
 
     const goQueue = () => {
         history.push(`/queue`);
@@ -62,14 +43,15 @@ function Profile(){
     useEffect (() => {
         dispatch({type: 'FETCH_USER_GAMES'})
     }, [])
-
+    
+    
     const [newQueue, updateNewQueue] = useState(queue);
     let [splicedQueue, setSplicedQueue] = useState(newQueue);
     function onDragEnd(result) {
         if (!result.destination){
             return;
         }
-        const games = Array.from(splicedQueue);
+        const games = Array.from(newQueue);
         const [reorderedItem] = games.splice(result.source.index, 1);
         games.splice(result.destination.index, 0, reorderedItem);
         updateNewQueue(games);
@@ -81,48 +63,57 @@ function Profile(){
         <>
             <h3>Profile</h3>
             <div className="buttons">
-                <button onClick={goSearch}>Search for Game</button>
-                <button onClick={goQueue}>Your Queue</button>
+                <Button color="secondary" variant="contained" onClick={goSearch}>Search for Game</Button>
+                <br />
+                <br />
+                <Button color="secondary" variant="contained" onClick={goQueue}>Your Queue</Button>
             </div>
             <br />
             <DragDropContext 
                 onDragEnd={onDragEnd}
             >
-                <Droppable droppableId="game">
-                {(provided) => (
-                <div ref={provided.innerRef}
-                {...provided.droppableProps}>
-                    {splicedQueue.map((game, index) => 
-                    <Draggable draggableId={String(game.game_id)} index={index} key={game.game_id}>
+                    <Droppable droppableId="game">
                     {(provided) => (
-                        <Card className={classes.root} {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                        justify="space-between"
-                        >
-                            <CardActionArea>
-                                <CardMedia
-                                    className={classes.image}
-                                >
-                                    <img src={game.image_url}></img>
-                                </CardMedia>
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        {game.game_title}
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="secondary">Move to End of Queue</Button>
-                            </CardActions>
-                        </Card>
-                        )}
-                    </Draggable>
+                    <div ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    style={{position: "relative"}}>
+                        <Container className={classes.cardGrid} maxWidth="xs">
+                            <Grid container spacing={4}>
+                                {queue.map((game, index) => 
+                                <Draggable draggableId={String(game.game_id)} index={index} key={game.game_id}>
+                                {(provided) => (
+                                    <Card className={classes.card} {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    ref={provided.innerRef}
+                                    justify="space-between"
+                                    >
+                                        <CardActionArea>
+                                            <CardMedia
+                                                className={classes.image}
+                                            >
+                                                <img src={game.image_url}></img>
+                                            </CardMedia>
+                                            <CardContent className={classes.cardContent}>
+                                                <Typography gutterBottom variant="h5" component="h2">
+                                                    {game.game_title}
+                                                </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                        <CardActions>
+                                            <Button size="small" color="secondary">Move to End of Queue</Button>
+                                        </CardActions>
+                                    </Card>
+                                    )}
+                                </Draggable>
+                                )}
+                            {provided.placeholder}
+                            </Grid>
+                        </Container>   
+                    </div>
                     )}
-                {provided.placeholder}
-                </div>
-                )}
-                </Droppable>
+                    </Droppable>
+                
+            
             </DragDropContext>
         </>
     );

@@ -13,7 +13,7 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { useTheme } from '@material-ui/core/styles';
-
+import { makeStyles } from '@material-ui/core/styles';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -25,14 +25,18 @@ import AddGame from '../AddGame/AddGame';
 import GameQueue from '../GameQueue/GameQueue';
 import SearchGame from '../SearchGame/SearchGame';
 import Details from '../Details/Details';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-// import './App.css';
+import './App.css';
+import useStyles from './style';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
 
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
+
+  const classes = useStyles();
 
   const theme = createMuiTheme({
     palette: {
@@ -56,111 +60,117 @@ function App() {
   }, [dispatch]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <div theme={theme}>
-          <Nav />
-          <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
+    <>
+    <CssBaseline />
+    <div className={classes.container}>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <div theme={theme}>
+            <Nav />
+            <Switch>
+              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+              <Redirect exact from="/" to="/home" />
 
-            {/* Visiting localhost:3000/about will show the about page. */}
-            <Route
-              // shows AboutPage at all times (logged in or not)
-              exact
-              path="/about"
-            >
-              <AboutPage />
-            </Route>
+              {/* Visiting localhost:3000/about will show the about page. */}
+              <Route
+                // shows AboutPage at all times (logged in or not)
+                exact
+                path="/about"
+              >
+                <AboutPage />
+              </Route>
 
-            {/* For protected routes, the view could show one of several things on the same route.
-              Visiting localhost:3000/user will show the UserPage if the user is logged in.
-              If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-              Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-            <ProtectedRoute
-              // logged in shows UserPage else shows LoginPage
-              exact
-              path="/user"
-            >
-              <UserPage />
-            </ProtectedRoute>
+              {/* For protected routes, the view could show one of several things on the same route.
+                Visiting localhost:3000/user will show the UserPage if the user is logged in.
+                If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
+                Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+              <ProtectedRoute
+                // logged in shows UserPage else shows LoginPage
+                exact
+                path="/user"
+              >
+                <UserPage />
+              </ProtectedRoute>
 
-            {/* <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
-              exact
-              path="/info"
-            >
-              <InfoPage />
-            </ProtectedRoute> */}
+              {/* <ProtectedRoute
+                // logged in shows InfoPage else shows LoginPage
+                exact
+                path="/info"
+              >
+                <InfoPage />
+              </ProtectedRoute> */}
 
-            {/* When a value is supplied for the authRedirect prop the user will
-              be redirected to the path supplied when logged in, otherwise they will
-              be taken to the component and path supplied. */}
-            <ProtectedRoute
-              // with authRedirect:
-              // - if logged in, redirects to "/user"
-              // - else shows LoginPage at /login
-              exact
-              path="/login"
-              // authRedirect="/profile"
-            >
-              <LoginPage />
-            </ProtectedRoute>
+              {/* When a value is supplied for the authRedirect prop the user will
+                be redirected to the path supplied when logged in, otherwise they will
+                be taken to the component and path supplied. */}
+              <ProtectedRoute
+                // with authRedirect:
+                // - if logged in, redirects to "/user"
+                // - else shows LoginPage at /login
+                exact
+                path="/login"
+                authRedirect="/profile"
+              >
+                <LoginPage />
+              </ProtectedRoute>
 
-            <ProtectedRoute
-              // with authRedirect:
-              // - if logged in, redirects to "/user"
-              // - else shows RegisterPage at "/registration"
-              exact
-              path="/registration"
-              authRedirect="/user"
-            >
-              <RegisterPage />
-            </ProtectedRoute>
+              <ProtectedRoute
+                // with authRedirect:
+                // - if logged in, redirects to "/user"
+                // - else shows RegisterPage at "/registration"
+                exact
+                path="/registration"
+                authRedirect="/user"
+              >
+                <RegisterPage />
+              </ProtectedRoute>
 
-            <ProtectedRoute
-              // with authRedirect:
-              // - if logged in, redirects to "/user"
-              // - else shows LandingPage at "/home"
-              exact
-              path="/home"
-            >
-              <LandingPage />
-            </ProtectedRoute>
-            
-            {/* If none of the other routes matched, we will show a 404. */}
-            </Switch>
-            <ProtectedRoute
-              exact path="/profile"
+              <Route
+                // with authRedirect:
+                // - if logged in, redirects to "/user"
+                // - else shows LandingPage at "/home"
+                exact
+                path="/home"
+                authRedirect="/profile"
+              >
+                <LandingPage />
+              </Route>
               
-            >
-              <Profile />
-            </ProtectedRoute>
-            <ProtectedRoute
-              exact path="/add"
-            >
-              <AddGame />
-            </ProtectedRoute>
+              {/* If none of the other routes matched, we will show a 404. */}
+              </Switch>
+              <ProtectedRoute
+                exact path="/profile"
+                
+              >
+                <Profile />
+              </ProtectedRoute>
+              <ProtectedRoute
+                exact path="/add"
+              >
+                <AddGame />
+              </ProtectedRoute>
 
-            <ProtectedRoute
-              exact path="/queue"
-            >
-              <GameQueue />
-            </ProtectedRoute>
-            <ProtectedRoute
-              exact path="/search"
-            >
-              <SearchGame />
-            </ProtectedRoute>
-            <ProtectedRoute
-              exact path="/details/:id"
-            >
-              <Details />
-            </ProtectedRoute>
-          <Footer />  
-        </div>
-      </Router>
-    </ThemeProvider>
+              <ProtectedRoute
+                exact path="/queue"
+              >
+                <GameQueue />
+              </ProtectedRoute>
+              <ProtectedRoute
+                exact path="/search"
+              >
+                <SearchGame />
+              </ProtectedRoute>
+              <ProtectedRoute
+                exact path="/details/:id"
+              >
+                <Details />
+              </ProtectedRoute>
+            <Footer />  
+          </div>
+        </Router>
+      </ThemeProvider>
+    </div>
+    </>
   );
 }
 

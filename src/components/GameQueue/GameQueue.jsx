@@ -10,21 +10,34 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardMedia from '@material-ui/core/CardMedia';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import useStyles from '../App/style.js'
+import GridLayout from 'react-grid-layout';
+import {Responsive as ResponsiveGridLayout} from 'react-grid-layout';
 
 function GameQueue(){
     const dispatch = useDispatch();
     const queue = useSelector(store => store.queue);
     console.log(queue)
 
-    const useStyles = makeStyles({
-        table: {
-            minWidth: 650,
-        },
-    });
+    useEffect(() => {
+        updateNewQueue(queue);
+    }, [queue])
+
+    useEffect (() => {
+        dispatch({type: 'FETCH_USER_GAMES'})
+    }, [])
+
     const classes=useStyles();
 
-
-    
 
     const [newQueue, updateNewQueue] = useState(queue);
     function onDragEnd(result) {
@@ -35,28 +48,35 @@ function GameQueue(){
         const [reorderedItem] = games.splice(result.source.index, 1);
         games.splice(result.destination.index, 0, reorderedItem);
         updateNewQueue(games);
-        dispatch({type: 'CHANGE_ORDER', payload: games})
+        console.log('Checking new queue:', games)
+        const updatedGames = Array.from(games);
+        console.log(updatedGames);
+        updateOrder(updatedGames);
+        
     }
 
     
+    const updateOrder = (updatedGames) => {
+       for (let i = 0; i < updatedGames.length; i++) {
+           updatedGames[i].order_number = (i + 1)
+           console.log(updatedGames[i].order_number);
+       }
+       console.log(updatedGames);
+       dispatch({type: 'CHANGE_ORDER', payload: updatedGames})
+    }
+
     
-
-    useEffect(() => {
-        updateNewQueue(queue);
-    }, [queue])
-
-    useEffect (() => {
-        dispatch({type: 'FETCH_USER_GAMES'})
-    }, [])
-    
-
     return (
         <div className="Queue">
-        <TableContainer component={Paper} color="primary">
+            <Container maxWidth="sm">
+                <Typography variant="h2" align="center" gutterBottom color="secondary">
+                    Your Queue
+                </Typography>
+            </Container>
             <DragDropContext 
                 onDragEnd={onDragEnd}
             >
-                <Table className={classes.table} aria-label="simple table">
+                {/* <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Title</TableCell>
@@ -65,31 +85,41 @@ function GameQueue(){
                             <TableCell align="right">Add Note</TableCell>
                             <TableCell align="right">Remove From Queue</TableCell>
                         </TableRow>
-                    </TableHead>
+                    </TableHead> */}
+                    
                         <Droppable droppableId="game">
-                            {(provided) => (
-                                <TableBody ref={provided.innerRef}
-                                {...provided.droppableProps}>
-                                    {newQueue.map((item, index) => 
-                                    <Draggable draggableId={String(item.game_id)} index={index} key={item.game_id}
-                                    >
-                                    {(provided) => (
-                                        <TableRow {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        ref={provided.innerRef}
-                                        >
-                                            <QueueItem game={item}/>
-                                        </TableRow>
-                                        )}
-                                    </Draggable>
-                                    )}
-                                {provided.placeholder}
-                                </TableBody>
-                            )}
-                        </Droppable>
-                </Table>
+                                {(provided) => (
+                                <Container className={classes.cardGrid} maxWidth="md">
+                                    <Grid container spacing={4}>
+                                    <div ref={provided.innerRef}
+                                    {...provided.droppableProps}>
+                                
+                                        
+                                    
+                                        {newQueue.map((item, index) => 
+                                        
+                                            <Draggable draggableId={String(item.game_id)} index={index} key={item.game_id}
+                                            >
+                                            
+                                            {(provided) => (
+                                                <Grid item key={item.game_id} className={classes.gridItem} md={4} spacing={0}>
+                                                    <Card className={classes.card} ref={provided.innerRef} {...provided.draggableProps}
+                                                    {...provided.dragHandleProps}
+                                                    >
+                                                        <QueueItem game={item}/>
+                                                    </Card>
+                                                </Grid>
+                                                )}
+                                            </Draggable>
+                                            )}
+                                        {provided.placeholder}
+                                    </div> 
+                                    
+                                    </Grid>
+                                    </Container>
+                                )} 
+                                </Droppable>
             </DragDropContext>
-        </TableContainer>
         </div>
     )
 }
