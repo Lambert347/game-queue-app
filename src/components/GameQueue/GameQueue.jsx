@@ -22,6 +22,7 @@ import Container from '@material-ui/core/Container';
 import useStyles from '../App/style.js'
 import GridLayout from 'react-grid-layout';
 import {Responsive as ResponsiveGridLayout} from 'react-grid-layout';
+import {ListManager} from "react-beautiful-dnd-grid"
 
 function GameQueue(){
     const dispatch = useDispatch();
@@ -65,6 +66,16 @@ function GameQueue(){
        dispatch({type: 'CHANGE_ORDER', payload: updatedGames})
     }
 
+    // const ListElement = props => <div ref={provided.innerRef}
+    // {...provided.droppableProps}>
+    //     <Draggable draggableId={String(props.item.game_id)} index={index} key={props.item.game_id}
+    //                                         >
+    //     <Card className={classes.card}>
+    //         <QueueItem game={props.item}/>
+    //     </Card>
+    //     </Draggable>
+    //     </div>;
+
     
     return (
         <div className="Queue">
@@ -75,50 +86,40 @@ function GameQueue(){
             </Container>
             <DragDropContext 
                 onDragEnd={onDragEnd}
-            >
-                {/* <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Title</TableCell>
-                            <TableCell align="right">Platform</TableCell>
-                            <TableCell align="right">Completed?</TableCell>
-                            <TableCell align="right">Add Note</TableCell>
-                            <TableCell align="right">Remove From Queue</TableCell>
-                        </TableRow>
-                    </TableHead> */}
-                    
-                        <Droppable droppableId="game">
-                                {(provided) => (
-                                <Container className={classes.cardGrid} maxWidth="md">
-                                    <Grid container spacing={4}>
-                                    <div ref={provided.innerRef}
-                                    {...provided.droppableProps}>
-                                
-                                        
-                                    
-                                        {newQueue.map((item, index) => 
-                                        
-                                            <Draggable draggableId={String(item.game_id)} index={index} key={item.game_id}
-                                            >
-                                            
-                                            {(provided) => (
-                                                <Grid item key={item.game_id} className={classes.gridItem} md={4} spacing={0}>
-                                                    <Card className={classes.card} ref={provided.innerRef} {...provided.draggableProps}
-                                                    {...provided.dragHandleProps}
-                                                    >
-                                                        <QueueItem game={item}/>
-                                                    </Card>
-                                                </Grid>
-                                                )}
-                                            </Draggable>
-                                            )}
-                                        {provided.placeholder}
-                                    </div> 
-                                    
-                                    </Grid>
-                                    </Container>
-                                )} 
-                                </Droppable>
+            >       
+                <Droppable droppableId="game">
+                    {(provided) => (
+                    <Container className={classes.cardGrid} maxWidth="md">
+                        <Grid container>
+                        {/* <ListManager 
+                        items={newQueue}
+                        direction="horizontal"
+                        maxItems={3}
+                        onDragEnd={onDragEnd}
+                        render={item => <ListElement item={item}/>}
+                        /> */}
+                        <div ref={provided.innerRef}
+                        {...provided.droppableProps}>
+                        {newQueue.map((item, index) => 
+                            <Draggable draggableId={String(item.game_id)} index={index} key={item.game_id}
+                            >
+                            {(provided) => (
+                            <Grid item key={item.game_id} className={classes.gridItem} md={4} spacing={0}>
+                                <Card className={classes.card} ref={provided.innerRef} {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                >
+                                    <QueueItem game={item}/>
+                                </Card>
+                            </Grid>
+                            )}
+                            </Draggable>
+                            )}
+                        {provided.placeholder}
+                        </div> 
+                        </Grid>
+                    </Container>
+                    )} 
+                </Droppable>
             </DragDropContext>
         </div>
     )

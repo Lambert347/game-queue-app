@@ -8,7 +8,8 @@ const useStyles = makeStyles((theme) => ({
     },
     cardGrid: {
         padding: '20px 0',
-        display: 'grid',
+        display: 'flex',
+        flexWrap: 'wrap',
     },
     card: {
         height: '100%',
@@ -63,6 +64,16 @@ const useStyles = makeStyles((theme) => ({
         marginRight: '0px',
         marginBottom: '10px',
         display: 'grid'
+    },
+    lndHead: {
+        backgroundColor: '#dd2c00',
+        border: '1px #DCDCDC',
+        borderRadius: '10px',
+    },
+    
+    drawer: {
+        marginLeft: "10px",
+
     }
     
    

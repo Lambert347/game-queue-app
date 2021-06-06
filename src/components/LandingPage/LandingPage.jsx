@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
 // CUSTOM COMPONENTS
 import LoginForm from '../LoginForm/LoginForm';
@@ -29,6 +30,11 @@ function LandingPage() {
 
   return (
   <>
+  <Container maxWidth="sm" className={classes.lndHead}>
+    <Typography variant="h2" align="center" gutterBottom color="black">
+        Game_time
+    </Typography>
+  </Container>
   <Grid container component="main" className={classes.root}>
     <CssBaseline />
     <Grid item xs={false} xs={false} sm={4} md={7} className={classes.landingImage} />
