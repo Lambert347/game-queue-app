@@ -37,7 +37,7 @@ function GameQueue(){
         dispatch({type: 'FETCH_USER_GAMES'})
     }, [])
 
-    const classes=useStyles();
+    const classes = useStyles();
 
 
     const [newQueue, updateNewQueue] = useState(queue);
@@ -51,7 +51,6 @@ function GameQueue(){
         updateNewQueue(games);
         console.log('Checking new queue:', games)
         const updatedGames = Array.from(games);
-        console.log(updatedGames);
         updateOrder(updatedGames);
         
     }
@@ -60,9 +59,7 @@ function GameQueue(){
     const updateOrder = (updatedGames) => {
        for (let i = 0; i < updatedGames.length; i++) {
            updatedGames[i].order_number = (i + 1)
-           console.log(updatedGames[i].order_number);
        }
-       console.log(updatedGames);
        dispatch({type: 'CHANGE_ORDER', payload: updatedGames})
     }
 
@@ -90,7 +87,7 @@ function GameQueue(){
                 <Droppable droppableId="game">
                     {(provided) => (
                     <Container className={classes.cardGrid} maxWidth="md">
-                        <Grid container>
+                        <Grid container spacing={4}>
                         {/* <ListManager 
                         items={newQueue}
                         direction="horizontal"
@@ -104,7 +101,7 @@ function GameQueue(){
                             <Draggable draggableId={String(item.game_id)} index={index} key={item.game_id}
                             >
                             {(provided) => (
-                            <Grid item key={item.game_id} className={classes.gridItem} md={4} spacing={0}>
+                            <Grid item key={item.game_id} className={classes.gridItem} md={4}>
                                 <Card className={classes.card} ref={provided.innerRef} {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                                 >

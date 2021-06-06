@@ -16,6 +16,7 @@ const genreRouter = require('./routes/genre.router');
 const editRouter = require('./routes/edit.router');
 const noteRouter = require('./routes/note.router');
 const orderRouter = require('./routes/order.router');
+const endRouter = require('./routes/end.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -37,7 +38,7 @@ app.use('/api/genres', genreRouter);
 app.use('/api/edit', editRouter);
 app.use('/api/note', noteRouter);
 app.use('/api/order', orderRouter);
-
+app.use('/api/end', endRouter);
 // Serve static files
 app.use(express.static('build'));
 

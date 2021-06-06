@@ -13,25 +13,35 @@ const useStyles = makeStyles((theme) => ({
     },
     card: {
         height: '100%',
+        width: '120%',
         display: 'flex',
         flexDirection: 'column',
-        paddingBottom: '0px',
+        paddingBottom: '30px',
         marginRight: '0px',
+        justifyContent: 'center',
         
     },
     image: {
-        paddingTop: '20.00%'
+        paddingTop: '0.00%',
+        flexGrow: 1,
+
     },
     cardContent: {
         flexGrow: 1,
         paddingBottom: '0px',
     },
+    profCard: {
+        height: '30%'
+    },
+
+
     formControl: {
         margin: theme.spacing(1),
         minWidth: 120,
         backgroundColor: '#dd2c00',
         justify: 'center',
     },
+
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
@@ -74,6 +84,9 @@ const useStyles = makeStyles((theme) => ({
     drawer: {
         marginLeft: "10px",
 
+    },
+    noteButton: {
+        marginRight: "5px",
     }
     
    
