@@ -23,8 +23,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-    const game = req.body.game_id;
+    let game = req.body.game_id;
     const user_id = req.user.id;
+
+    if (req.body.game_id === undefined) {
+        game = req.body.id;
+    }
     const queryText = `INSERT INTO "user_games" ("user_id", "game_id")
     VALUES ($1, $2 )
     RETURNING "id";`;

@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         paddingBottom: '30px',
-        marginRight: '0px',
         justifyContent: 'center',
         
     },
@@ -71,7 +70,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     gridItem: {
-        marginRight: '0px',
         marginBottom: '10px',
         display: 'grid'
     },
@@ -87,6 +85,26 @@ const useStyles = makeStyles((theme) => ({
     },
     noteButton: {
         marginRight: "5px",
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
+    searchGrid: {
+        padding: '20px 0',
+        display: 'flex',
+        margin: 'auto',
+        maxWidth: '1300'
+    },
+    searchCard: {
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        paddingBottom: '30px',
+        justifyContent: 'center',
+    },
+    searchItem: {
+        // marginRight: '10px',
     }
     
    
