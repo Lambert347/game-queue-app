@@ -29,20 +29,6 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
     } finally {
         client.release()
     }
-    
-    
-    // const queryText = `UPDATE user_games SET game_id = $3 WHERE user_games.id = $1 AND user_id = $2;`;
-
-    
-    
-    // pool.query(queryText, [newQueue.game_id, newQueue.id, userToUpdate])
-    // .then(result => {
-    //     res.sendStatus(200);
-    // })
-    // .catch((error) => {
-    //     console.log('Error with updating database for user queue', error);
-    //     res.sendStatus(500);
-    // })
 });
 
 module.exports = router;

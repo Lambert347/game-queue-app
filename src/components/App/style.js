@@ -8,29 +8,39 @@ const useStyles = makeStyles((theme) => ({
     },
     cardGrid: {
         padding: '20px 0',
-        display: 'grid',
+        display: 'flex',
+        flexWrap: 'wrap',
     },
     card: {
         height: '100%',
+        width: '120%',
         display: 'flex',
         flexDirection: 'column',
-        paddingBottom: '0px',
-        marginRight: '0px',
+        paddingBottom: '30px',
+        justifyContent: 'center',
         
     },
     image: {
-        paddingTop: '20.00%'
+        paddingTop: '0.00%',
+        flexGrow: 1,
+
     },
     cardContent: {
         flexGrow: 1,
         paddingBottom: '0px',
     },
+    profCard: {
+        height: '30%'
+    },
+
+
     formControl: {
         margin: theme.spacing(1),
         minWidth: 120,
         backgroundColor: '#dd2c00',
         justify: 'center',
     },
+
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
@@ -60,9 +70,41 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     gridItem: {
-        marginRight: '0px',
         marginBottom: '10px',
         display: 'grid'
+    },
+    lndHead: {
+        backgroundColor: '#dd2c00',
+        border: '1px #DCDCDC',
+        borderRadius: '10px',
+    },
+    
+    drawer: {
+        marginLeft: "10px",
+
+    },
+    noteButton: {
+        marginRight: "5px",
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
+    searchGrid: {
+        padding: '20px 0',
+        display: 'flex',
+        margin: 'auto',
+        maxWidth: '1300'
+    },
+    searchCard: {
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        paddingBottom: '30px',
+        justifyContent: 'center',
+    },
+    searchItem: {
+        // marginRight: '10px',
     }
     
    

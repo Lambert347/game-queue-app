@@ -4,6 +4,8 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 // import './Nav.css';
 import {useSelector} from 'react-redux';
 import Drawer from '../Drawer/Drawer';
+import {AppBar, CssBaseline, Toolbar } from '@material-ui/core'
+import useStyles from '../App/style.js'
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -18,18 +20,17 @@ function Nav() {
     loginLinkData.text = 'Home';
   }
 
+  const classes = useStyles();
   return (
+    <>
+    <CssBaseline />
     <div className="nav">
-      <Drawer>
-      <Link className="navLink" to="/add">
-          Add
-      </Link>
+      
+          <Drawer className={classes.drawer} />
 
-      </Drawer>
-      <Link to="/home">
-        <h2 className="nav-title">Game_time</h2>
-      </Link>
+      
     </div>
+    </>
   );
 }
 

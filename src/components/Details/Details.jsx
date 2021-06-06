@@ -19,7 +19,7 @@ function Details(){
     console.log('Checking queue:', queue);
 
 
-    const saveGame = () => {
+    const saveGame = (event) => {
         dispatch({type: 'UPDATE_QUEUE', payload: details})
         
     }
@@ -46,7 +46,7 @@ function Details(){
                         {details.has_game === true ?
                             <Button variant="contained" disabled>Already in Queue</Button> 
                             : (
-                            <Button variant="contained" color="secondary" onClick={saveGame}>Add Game</Button>
+                            <Button variant="contained" color="secondary" onClick={(event) => saveGame(event)}>Add Game</Button>
                             
                         )}
                 </section>

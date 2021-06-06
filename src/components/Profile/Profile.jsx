@@ -20,6 +20,7 @@ import Container from '@material-ui/core/Container';
 
 
 
+
 function Profile(){
     const queue = useSelector((store) => store.queue);
     const user = useSelector((store) => store.user);
@@ -37,13 +38,19 @@ function Profile(){
         history.push('/search');
     }
 
-    const theme = useTheme();
+    const sendEnd = (event, game) => {
+        dispatch({type: 'MOVE_TO_END', payload: game});
+    }
+
 
 
     useEffect (() => {
         dispatch({type: 'FETCH_USER_GAMES'})
     }, [])
     
+    useEffect(() => {
+        updateNewQueue(queue);
+    }, [queue])
     
     const [newQueue, updateNewQueue] = useState(queue);
     let [splicedQueue, setSplicedQueue] = useState(newQueue);
@@ -54,14 +61,26 @@ function Profile(){
         const games = Array.from(newQueue);
         const [reorderedItem] = games.splice(result.source.index, 1);
         games.splice(result.destination.index, 0, reorderedItem);
+        const updatedGames = Array.from(games);
         updateNewQueue(games);
-        // dispatch({type: 'CHANGE_ORDER', payload: games})
+        updateOrder(updatedGames);
+    }
+
+    const updateOrder = (updatedGames) => {
+        for (let i = 0; i < updatedGames.length; i++) {
+            updatedGames[i].order_number = (i + 1)
+        }
+        dispatch({type: 'CHANGE_ORDER', payload: updatedGames})
     }
     
 
     return (
         <>
-            <h3>Profile</h3>
+            <Container maxWidth="sm">
+                <Typography variant="h2" align="center" gutterBottom color="secondary">
+                    Your Profile
+                </Typography>
+            </Container>
             <div className="buttons">
                 <Button color="secondary" variant="contained" onClick={goSearch}>Search for Game</Button>
                 <br />
@@ -79,10 +98,10 @@ function Profile(){
                     style={{position: "relative"}}>
                         <Container className={classes.cardGrid} maxWidth="xs">
                             <Grid container spacing={4}>
-                                {queue.map((game, index) => 
+                                {newQueue.slice(0, 3).map((game, index) => 
                                 <Draggable draggableId={String(game.game_id)} index={index} key={game.game_id}>
                                 {(provided) => (
-                                    <Card className={classes.card} {...provided.draggableProps}
+                                    <Card className={classes.profCard} {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     ref={provided.innerRef}
                                     justify="space-between"
@@ -100,7 +119,7 @@ function Profile(){
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions>
-                                            <Button size="small" color="secondary">Move to End of Queue</Button>
+                                            <Button onClick={(event) => sendEnd(event, game)} size="small" color="secondary">Move to End of Queue</Button>
                                         </CardActions>
                                     </Card>
                                     )}
