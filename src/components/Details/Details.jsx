@@ -7,9 +7,7 @@ import axios from 'axios';
 function Details(){
     const details = useSelector(store => store.details);
     const dispatch = useDispatch();
-    const [inQueue, setInQueue] = useState(false);
     const queue = useSelector(store => store.queue);
-    const delay = ms => new Promise(res => setTimeout(res, ms));
 
     useEffect (() => {
         dispatch({type: 'FETCH_USER_GAMES'});
@@ -19,15 +17,11 @@ function Details(){
 
 
     console.log('Checking queue:', queue);
-    console.log('Checking in queue', inQueue);
 
-   
-    
-
-    
 
     const saveGame = () => {
         dispatch({type: 'UPDATE_QUEUE', payload: details})
+        
     }
 
     const {id} = useParams();
@@ -36,22 +30,7 @@ function Details(){
         dispatch({type: 'FETCH_DETAILS', payload: id})
     }, [])
 
-    const checkQueue = async () => {
-        console.log(queue);
-        await delay(100);
-        for (let i = 0; i < queue.length; i++) {
-            if (queue[i].game_id === details.game_id) {
-                setInQueue(true);
-                console.log(inQueue)
-            }
-            else {
-                setInQueue(false);
-            }
-        }
-    }
     
-   
-
     return (
         <div>
             {details === undefined ?
@@ -64,7 +43,7 @@ function Details(){
                         <p>{details.genre_name}</p>
                         <p>{details.description}</p>
                         <p>{details.play_time}</p>
-                        {inQueue === true ?
+                        {details.has_game === true ?
                             <Button variant="contained" disabled>Already in Queue</Button> 
                             : (
                             <Button variant="contained" color="secondary" onClick={saveGame}>Add Game</Button>

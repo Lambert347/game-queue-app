@@ -23,12 +23,13 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     const details = req.params.id;
     console.log(details);
 
-    const queryText = `SELECT description, genre_name, genres_id.game_id, "game_title", "play_time", "developer", "description", "publisher", "image_url", "platform", "creator_id"
+    const queryText = `SELECT description, genre_name, genres_id.game_id, "game_title", "play_time", "developer", "description", "publisher", "image_url", "platform", "creator_id", 
+    (SELECT COUNT(*) FROM user_games WHERE game_id = $1 AND user_id = $2) = 1 as has_game
     FROM "games"
-    JOIN "genres_id" ON genres_id.game_id = games.id
+    JOIN "genres_id" ON genres_id.game_id = games.id 
     JOIN "genres" ON genres.id = genres_id.genres_id
-    WHERE games.id=$1;`;
-    pool.query(queryText, [details])
+    WHERE games.id = $1;`;
+    pool.query(queryText, [details, req.user.id])
     .then(result => {
         console.log(result.rows[0]);
         res.send(result.rows[0]);

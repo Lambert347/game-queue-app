@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import {Button, TextField} from '@material-ui/core';
+import useStyles from '../App/style';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -9,6 +16,7 @@ function LoginForm() {
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
   const history = useHistory();
+  const classes = useStyles();
 
   const login = (event) => {
     event.preventDefault();
@@ -29,7 +37,7 @@ function LoginForm() {
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
+    <form className={classes.form} onSubmit={login}>
       <h2>Login</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
@@ -39,9 +47,16 @@ function LoginForm() {
       <div>
         <label htmlFor="username">
           Username:
-          <input
-            type="text"
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
             name="username"
+            autoComplete="username"
+            autoFocus
             required
             value={username}
             onChange={(event) => setUsername(event.target.value)}
@@ -51,9 +66,16 @@ function LoginForm() {
       <div>
         <label htmlFor="password">
           Password:
-          <input
-            type="password"
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
             name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
             required
             value={password}
             onChange={(event) => setPassword(event.target.value)}

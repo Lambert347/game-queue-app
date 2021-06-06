@@ -33,8 +33,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         .then(result => {
             console.log('New queue item id:', result.rows[0].id);
             const order = result.rows[0].id;
-            const queryOrderText = `UPDATE "user_games" SET "order_number" = $1;`;
-            pool.query(queryOrderText, [order]).then(result => {
+            const queryOrderText = `UPDATE "user_games" SET "order_number" = $1 WHERE user_id = ${req.user.id} AND game_id = $2;`;
+            pool.query(queryOrderText, [order, game]).then(result => {
                 res.sendStatus(201);
             }).catch(error => {
                 console.log('Error with updating order in add', error)
