@@ -161,7 +161,15 @@ const useStyles = makeStyles((theme) => ({
         border: '1px #DCDCDC',
         borderRadius: '10px',
         padding: '10px',
-
+    },
+    details: {
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: '50px',
+    },
+    detailsText: {
+        paddingRight: '500px',
+        marginLeft: '50px',
     }
     
    
