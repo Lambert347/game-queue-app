@@ -77,17 +77,22 @@ function Profile(){
     return (
         <>
             <Container maxWidth="sm">
-                <Typography variant="h2" align="center" gutterBottom color="secondary">
+                <Typography variant="h2" fontWeight="bold" align="center" gutterBottom color="secondary">
                     Your Profile
                 </Typography>
             </Container>
-            <div className="buttons">
-                <Button color="secondary" variant="contained" onClick={goSearch}>Search for Game</Button>
+            <div className={classes.profButtons}>
+                <Button color="secondary" variant="contained" style={{marginRight: '30px', justifyContent: 'center'}} onClick={goSearch}>Search</Button>
                 <br />
                 <br />
-                <Button color="secondary" variant="contained" onClick={goQueue}>Your Queue</Button>
+                <Button color="secondary" variant="contained" style={{justifyContent: 'center'}} onClick={goQueue}>Your Queue</Button>
             </div>
             <br />
+            <Container maxWidth="sm">
+                <Typography variant="h2" align="center" gutterBottom color="secondary">
+                    Your Profile Preview
+                </Typography>
+            </Container>
             <DragDropContext 
                 onDragEnd={onDragEnd}
             >
@@ -104,7 +109,7 @@ function Profile(){
                                     <Card className={classes.profCard} {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     ref={provided.innerRef}
-                                    justify="space-between"
+                                    // justify="space-between"
                                     >
                                         <CardActionArea>
                                             <CardMedia
@@ -131,8 +136,6 @@ function Profile(){
                     </div>
                     )}
                     </Droppable>
-                
-            
             </DragDropContext>
         </>
     );

@@ -31,7 +31,7 @@ function LandingPage() {
   return (
   <>
   <Container maxWidth="sm" className={classes.lndHead}>
-    <Typography variant="h2" align="center" gutterBottom color="black">
+    <Typography variant="h2" align="center" gutterBottom color="primary">
         Game_time
     </Typography>
   </Container>

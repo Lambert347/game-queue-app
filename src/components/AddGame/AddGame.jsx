@@ -29,6 +29,8 @@ function AddGame() {
     const [platform, setPlatform] = useState('');
     const [genreId, setGenreId] = useState('')
 
+    const [toggleOk, setToggleOk] = useState(false);
+
     const genre = useSelector((store) => store.genre);
     console.log(genre);
 
@@ -60,10 +62,10 @@ function AddGame() {
 
 
     const addGame = (event) => {
-        console.log('click');
         event.preventDefault();
         dispatch({type: 'ADD_NEW_GAME', payload: newGame})
         clearFields();
+        setToggleOk(true);
     }
 
 
@@ -73,14 +75,16 @@ function AddGame() {
  
     return (
         <>
+        <div className={classes.addImage}>
             <div>
-                <Container maxWidth="sm">
+                <Container className={classes.addHeader} maxWidth="sm">
                     <Typography variant="h3" align="center" gutterBottom>
                         Add a game to the library:
                     </Typography>
                     <Typography variant="h4" align="center" gutterBottom>
                         Make sure all the fields are correct and then submit!
                     </Typography>
+                
                 {errors.addMessage && (
                     <h3 className="alert" role="alert">
                         {errors.addMessage}
@@ -88,12 +92,15 @@ function AddGame() {
                 )}
                 </Container>
             </div>
+            <br />
+            <img src="https://external-preview.redd.it/aBy_l6ITXTGkCnN_sS3aDa2LXLr0E8hqef3jZ-bqeK4.png?auto=webp&s=dd8851d59ddad2a64100f64ed8cc9cb71a2eb11e" style={{position: 'absolute', right: 0, width: '450px', marginRight: '10px', border:'1px #DCDCDC', borderRadius: '10px'}}/>
+            <img src="https://cdna.artstation.com/p/assets/images/images/031/111/458/large/pierre-roussel-gamecube-web-indigo.jpg?1602629620" style={{position: 'absolute', left: 0, width: '450px', marginLeft: '10px', border:'1px #DCDCDC', borderRadius: '10px'}}/>
             <div>
                 <Grid className={classes.addForm} container spacing={2} justify="center">
                     <FormControl className={classes.formControl}>
                         <Grid item>
                             <InputLabel>Genre</InputLabel>
-                            <Select value={genre.id} defaultValue = "" name='genreId' onChange={(event) => setGenreId(event.target.value)}>
+                            <Select value={genre.id} defaultValue = "" name='genreId' className={classes.select} onChange={(event) => setGenreId(event.target.value)}>
                                     {genre.map(genre => {
                                         return <MenuItem key={genre.id} value={genre.id}>{genre.genre_name}</MenuItem>
                                     })}
@@ -127,27 +134,41 @@ function AddGame() {
                         <Grid item>
                             <TextField onChange={(event) => setPlatform(event.target.value)} value={platform} placeholder="Platform" required/>
                         </Grid>
-                        <Popup color="primary" trigger={ <Button onClick={addGame} color="secondary">Add Game</Button>}
+                        <br />
+                        <Popup color="primary" trigger={ <Button onClick={addGame} color="primary" variant="contained" >Add Game</Button>}
                         modal
                         nested
                         >
                         {close => (
-                            <div className="modal">
+                            <div className="modal" style={{justifyContent: 'center'}}>
                                 <Button className="close" onClick={close}>
                                     &times;
                                 </Button>
                                 <div className="header">Thanks!</div>
-                                <div className="content">
+                                <div className="content" style={{textAlign: 'center'}}>
                                     {' '}
-                                    <p>Thank for contributing! Your new game is now searchable!</p>
-                                </div>
-                                <Button onClick={addGame}>Ok</Button>
+                                    {toggleOk === false ?
+                                    <>
+                                        <p>Are you sure you want to add this game to the library?</p>
+                                        <p>Click the Yes button to confirm, and the x to cancel.</p>
+                                        <Button color="primary" variant="contained" onClick={addGame}>Yes!</Button>
+                                    </>
+                                    : (
+                                        <>
+                                            <p>Thank you for contributing! Your new game is now searchable!</p>
+                                            <Button onClick={close}>Ok</Button>
+                                        </>
+                                    )
+                                }   
+                                </div>  
                             </div>
                         )}
                         </Popup>
                     </FormControl>
                 </Grid>
             </div>
+            
+        </div>
         </>
     );
 }
