@@ -18,7 +18,9 @@ function Details(){
         dispatch({type: 'FETCH_USER_GAMES'});
     }, [])
             
-            
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
 
 
     console.log('Checking queue:', queue);
@@ -64,7 +66,7 @@ function Details(){
                         {details.has_game === true ?
                         <Button style={{width: 140}} fullWidth="false" variant="contained" disabled>Already in Queue</Button> 
                         : (
-                        <Button style={{width: 140}} fullWidth="false" variant="contained" color="secondary" onClick={(event) => saveGame(event)}>Add Game</Button>
+                        <Button style={{width: 140}} fullWidth="false" variant="contained" color="secondary" onClick={function(event){saveGame(event); refreshPage();}}>Add Game</Button>
                             
                     )}
                     </Box>
