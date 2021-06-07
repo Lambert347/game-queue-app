@@ -101,8 +101,8 @@ function Profile(){
                     <div ref={provided.innerRef}
                     {...provided.droppableProps}
                     style={{position: "relative"}}>
-                        <Container className={classes.cardGrid} maxWidth="xs">
-                            <Grid container spacing={4}>
+                        <Container maxWidth="md">
+                            <Grid container spacing={4} justify="center" alignItems="center" style={{ minHeight: '100vh' }}>
                                 {newQueue.slice(0, 3).map((game, index) => 
                                 <Draggable draggableId={String(game.game_id)} index={index} key={game.game_id}>
                                 {(provided) => (

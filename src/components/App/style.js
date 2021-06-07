@@ -5,11 +5,15 @@ const useStyles = makeStyles((theme) => ({
     container: {
         backgroundColor: '#263238',
         padding: theme.spacing(8, 0, 6),
+        height: '500%'
     },
     cardGrid: {
         padding: '20px 0',
         display: 'flex',
         flexWrap: 'wrap',
+        textAlign: 'center',
+        alignItems: 'center',
+        marginLeft: '710px'
     },
     card: {
         height: '100%',
@@ -102,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     },
     
     drawer: {
-        marginLeft: "10px",
+        marginLeft: '50px',
 
     },
     noteButton: {
@@ -144,6 +148,29 @@ const useStyles = makeStyles((theme) => ({
         color: '#263238',
         fontWeight: 'bold',
     },
+    cardWrap: {
+        justify: 'center',
+    },
+    searchSelect: {
+        backgroundColor: '#dd2c00',
+        margin: theme.spacing(1),
+        minWidth: 120,
+        backgroundColor: '#dd2c00',
+        justify: 'center',
+        fontWeight: 'bold',
+        border: '1px #DCDCDC',
+        borderRadius: '10px',
+        padding: '10px',
+    },
+    details: {
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: '50px',
+    },
+    detailsText: {
+        paddingRight: '500px',
+        marginLeft: '50px',
+    }
     
    
 }))

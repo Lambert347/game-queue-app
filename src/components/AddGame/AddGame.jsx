@@ -93,8 +93,8 @@ function AddGame() {
                 </Container>
             </div>
             <br />
-            <img src="https://external-preview.redd.it/aBy_l6ITXTGkCnN_sS3aDa2LXLr0E8hqef3jZ-bqeK4.png?auto=webp&s=dd8851d59ddad2a64100f64ed8cc9cb71a2eb11e" style={{position: 'absolute', right: 0, width: '450px', marginRight: '10px', border:'1px #DCDCDC', borderRadius: '10px'}}/>
-            <img src="https://cdna.artstation.com/p/assets/images/images/031/111/458/large/pierre-roussel-gamecube-web-indigo.jpg?1602629620" style={{position: 'absolute', left: 0, width: '450px', marginLeft: '10px', border:'1px #DCDCDC', borderRadius: '10px'}}/>
+            <img src="https://external-preview.redd.it/aBy_l6ITXTGkCnN_sS3aDa2LXLr0E8hqef3jZ-bqeK4.png?auto=webp&s=dd8851d59ddad2a64100f64ed8cc9cb71a2eb11e" style={{position: 'absolute', right: 0, width: '450px', marginRight: '150px', border:'1px #DCDCDC', borderRadius: '10px'}}/>
+            <img src="https://cdna.artstation.com/p/assets/images/images/031/111/458/large/pierre-roussel-gamecube-web-indigo.jpg?1602629620" style={{position: 'absolute', left: 0, width: '450px', marginLeft: '150px', border:'1px #DCDCDC', borderRadius: '10px'}}/>
             <div>
                 <Grid className={classes.addForm} container spacing={2} justify="center">
                     <FormControl className={classes.formControl}>
