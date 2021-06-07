@@ -63,17 +63,28 @@ function SearchGame() {
 
     return (
         <>
-        <h2>Search and Save</h2>
-            <form onSubmit={searchForGame}>
-                <input onChange={(event) => setSearch(event.target.value)} value={search} placeholder="Game Title"></input>
-                <InputLabel>Genre</InputLabel>
-                <Select value={searchGenre.genre_name} defaultValue = "" name='genreId' onChange={(event) => setGenre(event.target.value)}>
-                    {searchGenre.map(genre => {
-                        return <MenuItem key={genre.id} value={genre.genre_name}>{genre.genre_name}</MenuItem>
-                    })}
-                </Select>
-                <button>Search</button>
-            </form>
+        <Typography variant="h3" align="center" gutterBottom color="secondary" fontWeight="bold">
+            Search and Save
+        </Typography>
+        <Grid className={classes.addForm} container spacing={2} justify="center">
+            <FormControl onSubmit={searchForGame} className={classes.searchSelect} style={{padding: '20px'}}>
+                <Grid item>
+                    <TextField onChange={(event) => setSearch(event.target.value)} value={search} placeholder="Game Title"></TextField>
+                </Grid>
+                <br></br>
+                <Grid item>
+                    <Select value={searchGenre.genre_name} defaultValue = "" name='genreId' style={{minWidth: 120}} onChange={(event) => setGenre(event.target.value)}>
+                        {searchGenre.map(genre => {
+                            return <MenuItem key={genre.id} value={genre.genre_name}>{genre.genre_name}</MenuItem>
+                        })}
+                    </Select>
+                </Grid>
+                <br></br>
+                <Grid item>   
+                    <Button color="primary" variant="contained" onClick={searchForGame}>Search</Button>
+                </Grid>
+            </FormControl>
+        </Grid>
         {toggleSearch === false ?
            <div>
             {games[0] === undefined ?
