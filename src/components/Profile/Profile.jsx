@@ -124,7 +124,7 @@ function Profile(){
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions>
-                                            <Button onClick={(event) => sendEnd(event, game)} size="small" color="secondary">Move to End of Queue</Button>
+                                            <Button onClick={(event) => sendEnd(event, game)} size="small" variant="contained" color="secondary">Move to End of Queue</Button>
                                         </CardActions>
                                     </Card>
                                     )}

@@ -84,12 +84,11 @@ function AddGame() {
                     <Typography variant="h4" align="center" gutterBottom>
                         Make sure all the fields are correct and then submit!
                     </Typography>
-                
-                {errors.addMessage && (
-                    <h3 className="alert" role="alert">
-                        {errors.addMessage}
-                    </h3>
-                )}
+                    {errors.addMessage && (
+                        <h3 className="alert" role="alert">
+                            {errors.addMessage}
+                        </h3>
+                    )}
                 </Container>
             </div>
             <br />

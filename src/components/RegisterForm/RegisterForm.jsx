@@ -26,11 +26,11 @@ function RegisterForm() {
     <form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
       <p>Welcome! Enter a username and password to get started!</p>
-      {/* {errors.registrationMessage && (
+      {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
         </h3>
-      )} */}
+      )}
       <div>
         <label htmlFor="username">
           Username:
