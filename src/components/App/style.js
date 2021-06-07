@@ -30,15 +30,36 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: '0px',
     },
     profCard: {
-        height: '30%'
+        height: '45%',
+        marginBottom: '30px',
+        width: '120%',
+        paddingBottom: '0px',
+        display: 'flex',
+        flexDirection: 'column',
     },
-
-
+    about: {
+        backgroundColor: '#dd2c00',
+        padding: '10px',
+        color: '#263238',
+        marginRight: '1000px',
+        fontWeight: 'bold',
+        border: '1px #DCDCDC',
+        borderRadius: '10px',
+    },
     formControl: {
         margin: theme.spacing(1),
         minWidth: 120,
         backgroundColor: '#dd2c00',
         justify: 'center',
+        fontWeight: 'bold',
+        border: '1px #DCDCDC',
+        borderRadius: '10px',
+        padding: '10px',
+        input: {
+            "&::placeholder": {
+                fontWeight: 'bold',
+            },
+        }
     },
 
     selectEmpty: {
@@ -77,6 +98,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#dd2c00',
         border: '1px #DCDCDC',
         borderRadius: '10px',
+        fontWeight: 'bold',
     },
     
     drawer: {
@@ -105,7 +127,23 @@ const useStyles = makeStyles((theme) => ({
     },
     searchItem: {
         // marginRight: '10px',
-    }
+    },
+    profButtons: {
+        justifyContent: 'center',
+        display: 'flex',
+        margin: 'auto',
+    },
+    select: {
+        minWidth: 120,
+    },
+    addHeader: {
+        backgroundColor: '#dd2c00',
+        border: '1px #DCDCDC',
+        borderRadius: '10px',
+        padding: '10px',
+        color: '#263238',
+        fontWeight: 'bold',
+    },
     
    
 }))

@@ -75,6 +75,7 @@ function GameQueue(){
 
     
     return (
+        <>
         <div className="Queue">
             <Container maxWidth="sm">
                 <Typography variant="h2" align="center" gutterBottom color="secondary">
@@ -119,6 +120,7 @@ function GameQueue(){
                 </Droppable>
             </DragDropContext>
         </div>
+        </>
     )
 }
 
