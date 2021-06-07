@@ -4,7 +4,6 @@ import ReactDom from 'react-dom';
 import {useDispatch, useSelector, } from 'react-redux'
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import { useHistory } from 'react-router-dom';
-import Preview from '../Preview/Preview';
 import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
