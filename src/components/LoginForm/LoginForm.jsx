@@ -59,6 +59,7 @@ function LoginForm() {
             autoFocus
             required
             value={username}
+            color="secondary"
             onChange={(event) => setUsername(event.target.value)}
           />
         </label>
@@ -77,6 +78,7 @@ function LoginForm() {
             id="password"
             autoComplete="current-password"
             required
+            color="secondary"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
