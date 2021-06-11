@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     container: {
         backgroundColor: '#263238',
         padding: theme.spacing(8, 0, 6),
-        height: '500%'
+        height: '1000%'
     },
     cardGrid: {
         padding: '20px 0',

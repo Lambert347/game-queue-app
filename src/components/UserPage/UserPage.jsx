@@ -2,6 +2,7 @@ import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import {Button, Typography} from '@material-ui/core';
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -15,10 +16,14 @@ function UserPage() {
   return (
     <>
     <div className="container" onSubmit={goProfile}>
-      <h2>Welcome, {user.username}!</h2>
-      <p>We have a new profile set up for you, click the button to go to your profile.</p>
+      <Typography variant="h3" align="center" gutterBottom color="secondary" fontWeight="bold">
+        Welcome, {user.username}!
+      </Typography>
+      <Typography variant="h3" align="center" gutterBottom color="secondary" fontWeight="bold">
+        We have a new profile set up for you, click the button to go to your profile.
+      </Typography>
       <LogOutButton className="btn" />
-      <button onClick={goProfile}>Go to profile</button>
+      <Button color="secondary" variant="contained" onClick={goProfile}>Go to profile</Button>
     </div>
     
     </>

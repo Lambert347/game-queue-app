@@ -4,7 +4,6 @@ import ReactDom from 'react-dom';
 import {useDispatch, useSelector, } from 'react-redux'
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import { useHistory } from 'react-router-dom';
-import Preview from '../Preview/Preview';
 import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -124,7 +123,7 @@ function Profile(){
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions>
-                                            <Button onClick={(event) => sendEnd(event, game)} size="small" color="secondary">Move to End of Queue</Button>
+                                            <Button onClick={(event) => sendEnd(event, game)} size="small" variant="contained" color="secondary">Move to End of Queue</Button>
                                         </CardActions>
                                     </Card>
                                     )}

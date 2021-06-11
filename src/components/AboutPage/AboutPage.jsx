@@ -25,6 +25,8 @@ function AboutPage() {
           <li>Postgresql</li>
           <li>Express</li>
         </ul>
+        <br></br>
+        <h2>Credits to Pierre Roussel for his fantastic artwork</h2>
       </Box>
     </div>
   );
