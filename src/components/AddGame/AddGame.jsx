@@ -124,7 +124,7 @@ function AddGame() {
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setTitle(event.target.value)} value={'Hollow Knight'} placeholder="Game Title" required/>
+                            <TextField onChange={(event) => setTitle(event.target.value)} value={game_title} placeholder="Game Title" required/>
                         </Grid>
                         <br></br>
                         <Grid item>
