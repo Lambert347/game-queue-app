@@ -48,17 +48,6 @@ function AddGame() {
         genre: genreId,
     }
 
-    const testGame = {
-        game_title: 'Hollow Knight',
-        play_time: 40,
-        developer: 'Team Cherry',
-        description: 'Indie dark gothic platformer',
-        publisher: 'Team Cherry',
-        image_url: 'https://static-cdn.jtvnw.net/ttv-boxart/Hollow%20Knight.jpg',
-        platform: 'PC',
-        genre: 4,
-    }
-
     const clearFields = () => {
         setDescription('');
         setUrl('');
@@ -74,7 +63,7 @@ function AddGame() {
 
 
     const addGame = (event) => {
-        dispatch({type: 'ADD_NEW_GAME', payload: testGame})
+        dispatch({type: 'ADD_NEW_GAME', payload: newGame})
         clearFields();
         setToggleOk(true);
     }
@@ -124,31 +113,31 @@ function AddGame() {
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setTitle(event.target.value)} value={game_title} placeholder="Game Title" required/>
+                            <TextField onChange={(event) => setTitle(event.target.value)} value={title} placeholder="Game Title" required/>
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setPlayTime(event.target.value)} value={40} placeholder="Average Play Time" required/>
+                            <TextField onChange={(event) => setPlayTime(event.target.value)} value={playTime} placeholder="Average Play Time" required/>
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setDeveloper(event.target.value)} value={'Team Cherry'} placeholder="Developer" required />
+                            <TextField onChange={(event) => setDeveloper(event.target.value)} value={developer} placeholder="Developer" required />
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setDescription(event.target.value)} value={'Indie gothic platformer'} placeholder="Description" required />
+                            <TextField onChange={(event) => setDescription(event.target.value)} value={description} placeholder="Description" required />
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setPublisher(event.target.value)} value={'Team Cherry'} placeholder="Publisher" required />
+                            <TextField onChange={(event) => setPublisher(event.target.value)} value={publisher} placeholder="Publisher" required />
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setUrl(event.target.value)} value={'https://static-cdn.jtvnw.net/ttv-boxart/Hollow%20Knight.jpg'} placeholder="Image Url" required/>
+                            <TextField onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image Url" required/>
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setPlatform(event.target.value)} value={'PC'} placeholder="Platform" required/>
+                            <TextField onChange={(event) => setPlatform(event.target.value)} value={platform} placeholder="Platform" required/>
                         </Grid>
                         <br />
                         <Popup color="primary" trigger={ <Button color="primary" variant="contained" >Add Game</Button>}

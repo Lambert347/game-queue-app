@@ -7,9 +7,12 @@ const {
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const query = `SELECT * FROM "games";`;
+    console.log(req.user.id);
+    const query = `SELECT *,
+    (SELECT COUNT(*) FROM user_games WHERE user_id = $1) = 1 as has_game
+    FROM "games";`;
 
-    pool.query(query)
+    pool.query(query, [req.user.id])
         .then(result => {
             res.send(result.rows);
         })
