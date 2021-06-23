@@ -14,7 +14,6 @@ function SearchItem(props) {
     const history = useHistory();
     
     const game = props.game
-    console.log(game.game_id);
     const saveGame = () => {
         dispatch({type: 'UPDATE_QUEUE', payload: game})
     }
@@ -84,7 +83,11 @@ function SearchItem(props) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
+                {game.has_game === true ?
+                <Button color="secondary" variant="contained" disabled onClick={saveGame}><FavoriteTwoToneIcon/></Button>
+                : (
                 <Button color="secondary" variant="contained" onClick={saveGame}><FavoriteTwoToneIcon/></Button>
+                )}
             </CardActions>
         </>
         )
