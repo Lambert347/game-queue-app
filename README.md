@@ -11,7 +11,7 @@ Additional features for the next version will be the ability to search by more t
 
 ## Demo
 Short demonstration of the project:
-![Alt Text](Filmage 2021-06-23_123712.gif)
+![Alt Text](https://github.com/Lambert347/game-queue-app/blob/master/Filmage%202021-06-23_123712.gif)
 
 ## Prerequisites
 
