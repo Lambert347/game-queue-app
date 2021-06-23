@@ -9,6 +9,10 @@ This queue is accessible from the profile page, which shows a "preview" of the f
 
 Additional features for the next version will be the ability to search by more than just genre or title, a button to add a random game to the queue, and additional genre classifications for games. 
 
+## Demo
+Short demonstration of the project:
+![Alt Text](Filmage 2021-06-23_123712.gif)
+
 ## Prerequisites
 
 Before you get started, make sure you have the following software installed on your computer:

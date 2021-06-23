@@ -136,7 +136,6 @@ function App() {
                 <LandingPage />
               </Route>
               
-              {/* If none of the other routes matched, we will show a 404. */}
               </Switch>
               <ProtectedRoute
                 exact path="/profile"

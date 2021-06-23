@@ -9,7 +9,10 @@ import useStyles from '../App/style.js'
 
 function AboutPage() {
 
+  //import the styling from the style.js file
   const classes = useStyles();
+
+  //renders the pretty basic about page to the DOM
   return (
     <div className="container">
       <Box className={classes.about}>

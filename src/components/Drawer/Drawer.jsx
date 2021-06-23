@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 
 export default function TemporaryDrawer(){
 
+  //array of menuItems with objects for each path. These correspond to the buttons in the drawer that will direct the user to the specific path when clicked 
     const menuItems = [
         {
             text: 'Profile',
@@ -46,6 +47,8 @@ export default function TemporaryDrawer(){
 
     ]
     const history = useHistory();
+
+    // basic styling for the drawer
     const useStyles = makeStyles({
         list: {
           width: 250,
@@ -58,16 +61,20 @@ export default function TemporaryDrawer(){
         }
       });
     const classes = useStyles();
+
     const [state, setState] = React.useState({
       top: false,
     });
   
+    //function to toggle the opening of the drawer when the anchor is clicked
     const toggleDrawer = (anchor, open) => (event) => {
       if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
         return;
       }
       setState({...state, [anchor]: open});
     };
+
+    //function for rendering of the list of buttons and its items when the anchor is clicked
     const list = (anchor) => (
       <div
         className={clsx(classes.list, {
@@ -77,6 +84,7 @@ export default function TemporaryDrawer(){
         onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
       >
+        {/* maps through the list to render them to the drawer */}
         <List color="palette.secondary">
           {menuItems.map((item, index) => (
             <ListItem button key={item.text}
@@ -85,6 +93,8 @@ export default function TemporaryDrawer(){
               <ListItemText color="secondary">{item.text}</ListItemText>
             </ListItem>
           ))}
+
+          {/* brings in the logout button so the user can logout easily from the drawer */}
           <ListItem>
             <LogOutButton />
           </ListItem>
@@ -95,6 +105,9 @@ export default function TemporaryDrawer(){
   
     return (
         <div>
+
+          {/* renders the anchor to the dom */}
+          {/* 'left' tells the anchor that the drawer will pop in from the left when the anchor is clicked */}
             {['left'].map((anchor) => (
             <React.Fragment key={anchor}>
                 <Button color="secondary" variant="contained" size="large" className={classes.drawer} onClick={toggleDrawer(anchor, true)}>Menu</Button>
