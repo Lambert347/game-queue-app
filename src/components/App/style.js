@@ -151,6 +151,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cardWrap: {
         justify: 'center',
+        alignItems: 'center'
     },
     searchSelect: {
         backgroundColor: '#dd2c00',
