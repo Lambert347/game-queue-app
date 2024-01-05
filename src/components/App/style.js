@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         textAlign: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
         marginLeft: '710px'
     },
     card: {
@@ -53,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
         minWidth: '50%',
-
         backgroundColor: '#dd2c00',
         justify: 'center',
         fontWeight: 'bold',
@@ -72,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
     },
     addForm: {
         padding: theme.spacing(8, 0, 6),
-        minWidth: '50%'
     },
     landingImage: {
         backgroundImage: 'url(https://i.imgur.com/YPJbVJ5.png)',

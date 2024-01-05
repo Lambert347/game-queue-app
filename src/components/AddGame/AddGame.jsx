@@ -116,7 +116,7 @@ function AddGame() {
             <img src="https://cdna.artstation.com/p/assets/images/images/031/111/458/large/pierre-roussel-gamecube-web-indigo.jpg?1602629620" style={{position: 'absolute', left: 0, width: '450px', marginLeft: '150px', border:'1px #DCDCDC', borderRadius: '10px'}}/> */}
             
             {/* Renders the actual form to the page  */}
-            <div>
+            <div className={classes.addBox}>
                 <Grid className={classes.addForm} container spacing={2} justify="center">
                     <FormControl className={classes.formControl}>
                         <Grid item>

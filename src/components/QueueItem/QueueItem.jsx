@@ -65,7 +65,7 @@ function QueueItem(props){
                 </CardContent>
             </CardActionArea>
             <CardActions>
-            <Button size="small" onClick={(event) => sendEnd(event, game)} variant="outlined" size="small" color="secondary">
+            <Button size="small" onClick={(event) => sendEnd(event, game)} variant="outlined" color="secondary">
                 <ArrowDownwardIcon />
             </Button>
             {game && game.note ?
