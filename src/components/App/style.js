@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
         margin: theme.spacing(1),
-        minWidth: 120,
+        minWidth: '50%',
         backgroundColor: '#dd2c00',
         justify: 'center',
         fontWeight: 'bold',
@@ -170,9 +170,7 @@ const useStyles = makeStyles((theme) => ({
     detailsText: {
         paddingRight: '500px',
         marginLeft: '50px',
-    }
-    
-   
+    },
 }))
 
 export default useStyles;

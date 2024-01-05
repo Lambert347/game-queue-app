@@ -17,7 +17,7 @@ export default function TemporaryDrawer(){
   //array of menuItems with objects for each path. These correspond to the buttons in the drawer that will direct the user to the specific path when clicked 
     const menuItems = [
         {
-            text: 'Profile',
+            text: 'Home',
             path: '/profile',
         },
         {
@@ -29,21 +29,13 @@ export default function TemporaryDrawer(){
             path: '/queue',
         },
         {
-            text: 'Home',
-            path: '/home',
-        },
-        {
             text: 'Add',
             path: '/add',
         },
         {
             text: 'About',
             path: '/about',
-        },
-        {
-            text: 'Login/Register',
-            path: '/login',
-        },
+        }
 
     ]
     const history = useHistory();

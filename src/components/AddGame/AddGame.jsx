@@ -112,8 +112,8 @@ function AddGame() {
                 </Container>
             </div>
             <br />
-            <img src="https://external-preview.redd.it/aBy_l6ITXTGkCnN_sS3aDa2LXLr0E8hqef3jZ-bqeK4.png?auto=webp&s=dd8851d59ddad2a64100f64ed8cc9cb71a2eb11e" style={{position: 'absolute', right: 0, width: '450px', marginRight: '150px', border:'1px #DCDCDC', borderRadius: '10px'}}/>
-            <img src="https://cdna.artstation.com/p/assets/images/images/031/111/458/large/pierre-roussel-gamecube-web-indigo.jpg?1602629620" style={{position: 'absolute', left: 0, width: '450px', marginLeft: '150px', border:'1px #DCDCDC', borderRadius: '10px'}}/>
+            {/* <img src="https://external-preview.redd.it/aBy_l6ITXTGkCnN_sS3aDa2LXLr0E8hqef3jZ-bqeK4.png?auto=webp&s=dd8851d59ddad2a64100f64ed8cc9cb71a2eb11e" style={{position: 'absolute', right: 0, width: '450px', marginRight: '150px', border:'1px #DCDCDC', borderRadius: '10px'}}/>
+            <img src="https://cdna.artstation.com/p/assets/images/images/031/111/458/large/pierre-roussel-gamecube-web-indigo.jpg?1602629620" style={{position: 'absolute', left: 0, width: '450px', marginLeft: '150px', border:'1px #DCDCDC', borderRadius: '10px'}}/> */}
             
             {/* Renders the actual form to the page  */}
             <div>
@@ -123,7 +123,7 @@ function AddGame() {
                             <InputLabel>Genre</InputLabel>
                             
                             {/* renders the dropdown menu for the genres, takes the genreId of the select genre and sends it to the server as part of the newGame object when the form is submitted */}
-                            <Select value={genre.id} defaultValue = "" name='genreId' className={classes.select} onChange={(event) => setGenreId(event.target.value)}>
+                            <Select fullWidth value={genre.id} defaultValue = "" name='genreId' className={classes.select} onChange={(event) => setGenreId(event.target.value)}>
                                     {genre.map(genre => {
                                         return <MenuItem key={genre.id} value={genre.id}>{genre.genre_name}</MenuItem>
                                     })}
@@ -134,31 +134,31 @@ function AddGame() {
                         {/* renders the text fields that the user types their values into. These are required, and work in conjunction with the errors to ensure that the user is not sending bad data */}
                         {/* when the form is submitted via the popup, the values are packaged into the newGame object and dispatched to the server */}
                         <Grid item>
-                            <TextField onChange={(event) => setTitle(event.target.value)} value={title} placeholder="Game Title" required/>
+                            <TextField fullWidth onChange={(event) => setTitle(event.target.value)} value={title} placeholder="Game Title" required/>
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setPlayTime(event.target.value)} value={playTime} placeholder="Average Play Time" required/>
+                            <TextField fullWidth onChange={(event) => setPlayTime(event.target.value)} value={playTime} placeholder="Average Play Time" required/>
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setDeveloper(event.target.value)} value={developer} placeholder="Developer" required />
+                            <TextField fullWidth onChange={(event) => setDeveloper(event.target.value)} value={developer} placeholder="Developer" required />
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setDescription(event.target.value)} value={description} placeholder="Description" required />
+                            <TextField fullWidth onChange={(event) => setDescription(event.target.value)} value={description} placeholder="Description" required />
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setPublisher(event.target.value)} value={publisher} placeholder="Publisher" required />
+                            <TextField fullWidth onChange={(event) => setPublisher(event.target.value)} value={publisher} placeholder="Publisher" required />
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image Url" required/>
+                            <TextField fullWidth onChange={(event) => setUrl(event.target.value)} value={url} placeholder="Image Url" required/>
                         </Grid>
                         <br></br>
                         <Grid item>
-                            <TextField onChange={(event) => setPlatform(event.target.value)} value={platform} placeholder="Platform" required/>
+                            <TextField fullWidth onChange={(event) => setPlatform(event.target.value)} value={platform} placeholder="Platform" required/>
                         </Grid>
                         <br />
 

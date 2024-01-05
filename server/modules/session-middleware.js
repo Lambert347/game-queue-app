@@ -1,6 +1,6 @@
 // No changes should be required in this file
 
-const cookieSession = require('cookie-session');
+const cookieSession = require('express-session');
 const warnings = require('../constants/warnings');
 
 /*
