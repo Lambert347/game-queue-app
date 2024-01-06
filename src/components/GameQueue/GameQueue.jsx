@@ -103,21 +103,19 @@ function GameQueue(){
             {/* DragDropContext declares an area of the DOM in which the drag and dropping occurs */}
             <DragDropContext 
                 onDragEnd={onDragEnd}
-                className={classes.dragDropContext}
             >       
-
                 {/* droppable declares the specific area that elements can be dropped into. In this case, it is the card grid that is the area elements can be moved around in */}
-                <Droppable droppableId="game" display='flex'>
+                <Droppable droppableId="game" display="flex">
                     {(provided) => (
                     <div className={classes.cardGrid} maxWidth="md">
-                        <Grid container spacing={4} maxWidth='true' alignContent='center' justifyContent='center'>
+                        <Grid container spacing={4} maxWidth='true' alignContent='center' justifyContent='center' display='flex'>
                         <div ref={provided.innerRef}
                         {...provided.droppableProps}>
                         {newQueue.map((item, index) => 
-                            <Draggable draggableId={String(item.game_id)} index={index} key={item.game_id}
+                            <Draggable draggableId={String(item.game_id)} index={index} key={item.game_id} display='flex'
                             >
                             {(provided) => (
-                            <Grid item key={item.game_id} className={classes.gridItem} md={4}>
+                            <Grid item key={item.game_id} className={classes.gridItem} md={4} display='flex'>
                                 <Card className={classes.card} ref={provided.innerRef} {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                                 >

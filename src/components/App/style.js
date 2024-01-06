@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         paddingBottom: '30px',
         justifyContent: 'center',
-        
     },
     image: {
         paddingTop: '0.00%',
@@ -98,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '10px',
         display: 'inline-block',
         alignContent: 'center',
-
+        marginRight: '60px'
     },
     lndHead: {
         backgroundColor: '#dd2c00',
