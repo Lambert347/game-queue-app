@@ -94,7 +94,7 @@ function GameQueue(){
     return (
         <>
         <div className={classes.cardWrap}>
-            <Container maxWidth="sm">
+            <Container>
                 <Typography variant="h2" align="center" gutterBottom color="secondary">
                     Your Queue
                 </Typography>
@@ -103,13 +103,14 @@ function GameQueue(){
             {/* DragDropContext declares an area of the DOM in which the drag and dropping occurs */}
             <DragDropContext 
                 onDragEnd={onDragEnd}
+                className={classes.dragDropContext}
             >       
 
                 {/* droppable declares the specific area that elements can be dropped into. In this case, it is the card grid that is the area elements can be moved around in */}
-                <Droppable droppableId="game">
+                <Droppable droppableId="game" display='flex'>
                     {(provided) => (
-                    <Container className={classes.cardGrid} maxWidth="md">
-                        <Grid container spacing={4}>
+                    <div className={classes.cardGrid} maxWidth="md">
+                        <Grid container spacing={4} maxWidth='true' alignContent='center' justifyContent='center'>
                         <div ref={provided.innerRef}
                         {...provided.droppableProps}>
                         {newQueue.map((item, index) => 
@@ -129,7 +130,7 @@ function GameQueue(){
                         {provided.placeholder}
                         </div> 
                         </Grid>
-                    </Container>
+                    </div>
                     )} 
                 </Droppable>
             </DragDropContext>

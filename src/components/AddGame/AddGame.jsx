@@ -117,10 +117,10 @@ function AddGame() {
             
             {/* Renders the actual form to the page  */}
             <div className={classes.addBox}>
-                <Grid className={classes.addForm} container spacing={2} justify="center">
-                    <FormControl className={classes.formControl}>
+                <Grid className={classes.addForm} container spacing={2} justifyContent="center">
+                    <FormControl className={classes.formControl} style={{minWidth: "50%", paddingLeft: 20, paddingRight: 20}}>
                         <Grid item>
-                            <InputLabel>Genre</InputLabel>
+                            <InputLabel style={{paddingLeft: 20}} >Genre</InputLabel>
                             
                             {/* renders the dropdown menu for the genres, takes the genreId of the select genre and sends it to the server as part of the newGame object when the form is submitted */}
                             <Select fullWidth value={genre.id} defaultValue = "" name='genreId' className={classes.select} onChange={(event) => setGenreId(event.target.value)}>

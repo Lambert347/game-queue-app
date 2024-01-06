@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import {Button, TextField} from '@material-ui/core';
+import {TextField} from '@material-ui/core';
 import useStyles from '../App/style';
 
 function LoginForm() {
@@ -18,22 +13,16 @@ function LoginForm() {
   const history = useHistory();
   const classes = useStyles();
 
-  const login = (event) => {
-    event.preventDefault();
 
-    if (username && password) {
-      dispatch({
-        type: 'LOGIN',
-        payload: {
-          username: username,
-          password: password,
-        },
-      });
-      history.push('/profile');
-    } else {
+  function login() {
+    try {
+      const success = dispatch({type: 'LOGIN', payload: {username: username, password: password}})
+      if(success){
+        history.push('/profile');
+      }
+    } catch (e) {
       dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-
   }; // end login
 
   return (
@@ -57,7 +46,6 @@ function LoginForm() {
             name="username"
             autoComplete="username"
             autoFocus
-            required
             value={username}
             color="secondary"
             onChange={(event) => setUsername(event.target.value)}
@@ -77,7 +65,6 @@ function LoginForm() {
             type="password"
             id="password"
             autoComplete="current-password"
-            required
             color="secondary"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
