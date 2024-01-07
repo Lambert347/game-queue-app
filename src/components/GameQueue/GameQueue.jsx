@@ -95,7 +95,7 @@ function GameQueue(){
         <>
         <div className={classes.cardWrap}>
             <Container maxWidth="sm">
-                <Typography variant="h2" align="center" gutterBottom color="secondary">
+                <Typography variant="h2" gutterBottom color="secondary">
                     Your Queue
                 </Typography>
             </Container>
