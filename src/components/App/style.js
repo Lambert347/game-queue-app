@@ -8,18 +8,17 @@ const useStyles = makeStyles((theme) => ({
         height: '1000%'
     },
     cardGrid: {
+        padding: '20px 0',
         display: 'flex',
         flexWrap: 'wrap',
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        width: '100%'
+        marginLeft: '710px'
     },
     card: {
         height: '100%',
-        width: '100%',
+        width: '120%',
         display: 'flex',
         flexDirection: 'column',
         paddingBottom: '30px',
@@ -55,8 +54,9 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         minWidth: '50%',
         backgroundColor: '#dd2c00',
-        justifyContent: 'center',
+        justify: 'center',
         fontWeight: 'bold',
+        border: '1px #DCDCDC',
         borderRadius: '10px',
         padding: '10px',
         input: {
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
             },
         }
     },
+
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
@@ -95,9 +96,7 @@ const useStyles = makeStyles((theme) => ({
     },
     gridItem: {
         marginBottom: '10px',
-        display: 'inline-block',
-        alignContent: 'center',
-        marginRight: '60px'
+        display: 'grid'
     },
     lndHead: {
         backgroundColor: '#dd2c00',
@@ -105,6 +104,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '10px',
         fontWeight: 'bold',
     },
+    
     drawer: {
         marginLeft: '50px',
 
@@ -128,6 +128,9 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         paddingBottom: '30px',
         justifyContent: 'center',
+    },
+    searchItem: {
+        // marginRight: '10px',
     },
     profButtons: {
         justifyContent: 'center',

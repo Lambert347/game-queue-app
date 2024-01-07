@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {TextField} from '@material-ui/core';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import {Button, TextField} from '@material-ui/core';
 import useStyles from '../App/style';
 
 function LoginForm() {
@@ -13,16 +18,22 @@ function LoginForm() {
   const history = useHistory();
   const classes = useStyles();
 
+  const login = (event) => {
+    event.preventDefault();
 
-  function login() {
-    try {
-      const success = dispatch({type: 'LOGIN', payload: {username: username, password: password}})
-      if(success){
-        history.push('/profile');
-      }
-    } catch (e) {
+    if (username && password) {
+      dispatch({
+        type: 'LOGIN',
+        payload: {
+          username: username,
+          password: password,
+        },
+      });
+      history.push('/profile');
+    } else {
       dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
+
   }; // end login
 
   return (

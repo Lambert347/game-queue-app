@@ -94,7 +94,7 @@ function GameQueue(){
     return (
         <>
         <div className={classes.cardWrap}>
-            <Container>
+            <Container maxWidth="sm">
                 <Typography variant="h2" align="center" gutterBottom color="secondary">
                     Your Queue
                 </Typography>
@@ -105,10 +105,10 @@ function GameQueue(){
                 onDragEnd={onDragEnd}
             >       
                 {/* droppable declares the specific area that elements can be dropped into. In this case, it is the card grid that is the area elements can be moved around in */}
-                <Droppable droppableId="game" display="flex">
+                <Droppable droppableId="game">
                     {(provided) => (
-                    <div className={classes.cardGrid} maxWidth="md">
-                        <Grid container spacing={4} maxWidth='true' alignContent='center' justifyContent='center' display='flex'>
+                    <Container className={classes.cardGrid} maxWidth="md">
+                        <Grid container spacing={4}>
                         <div ref={provided.innerRef}
                         {...provided.droppableProps}>
                         {newQueue.map((item, index) => 
@@ -128,7 +128,7 @@ function GameQueue(){
                         {provided.placeholder}
                         </div> 
                         </Grid>
-                    </div>
+                    </Container>
                     )} 
                 </Droppable>
             </DragDropContext>
