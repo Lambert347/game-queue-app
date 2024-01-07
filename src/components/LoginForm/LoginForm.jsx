@@ -18,24 +18,17 @@ function LoginForm() {
   const history = useHistory();
   const classes = useStyles();
 
-  const login = (event) => {
-    event.preventDefault();
 
-    if (username && password) {
-      dispatch({
-        type: 'LOGIN',
-        payload: {
-          username: username,
-          password: password,
-        },
-      });
-      history.push('/profile');
-    } else {
+  function login() {
+    try {
+      const success = dispatch({type: 'LOGIN', payload: {username: username, password: password}})
+      if(success){
+        history.push('/profile');
+      }
+    } catch (e) {
       dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-
   }; // end login
-
   return (
     <form className={classes.form} onSubmit={login}>
       <h2>Login</h2>
